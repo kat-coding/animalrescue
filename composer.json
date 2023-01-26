@@ -1,0 +1,12 @@
+{
+  "name": "animalrescue",
+  "authors": [
+    {
+      "name": "Katherine Watkins",
+      "email": "watkins.katherine@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
