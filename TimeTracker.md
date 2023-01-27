@@ -1,5 +1,5 @@
 ## Team Members
-Kate(), Alex(AB),Dee().
+Kate(), Alex(AB),Dee(DB).
 
 ## Time Tracker
 Formate: date ,Time worked on project, Who was there(initals).
