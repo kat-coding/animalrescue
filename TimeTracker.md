@@ -2,6 +2,8 @@
 Kate(), Alex(AB),Dee(DB).
 
 ## Time Tracker
-Formate: date ,Time worked on project, Who was there(initals).
+Format: date,Time worked on project, Who was there(initals).
 
-01/27/2023, ,AB  
+1/26/2023, 1/2 hour, DB (added favicon)
+01/27/2023, ,AB, DB (planning meeting)  
+
