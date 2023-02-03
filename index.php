@@ -23,7 +23,7 @@ echo $view-> render('views/home.html');
 });
 
 //define "About" page route
-$f3->route('GET /resources', function (){
+$f3->route('GET /about', function (){
 
 $view = new Template();
 echo $view-> render('views/about.html');
