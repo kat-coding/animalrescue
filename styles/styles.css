@@ -15,9 +15,16 @@
 .navbar-toggler-icon{
     color: black !important;
 }
-img{
+
+img {
+    max-width:100%;
+    height:auto;
     border-radius: 20px;
 }
+.img-div{
+    justify-content: center;
+}
+
 .description{
     background-color: #dbfdb4;
     border-radius: 20px;
