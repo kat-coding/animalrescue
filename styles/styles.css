@@ -15,3 +15,11 @@
 .navbar-toggler-icon{
     color: black !important;
 }
+img{
+    border-radius: 20px;
+}
+.description{
+    background-color: #dbfdb4;
+    border-radius: 20px;
+    padding: 5px;
+}
