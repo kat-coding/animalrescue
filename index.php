@@ -22,6 +22,13 @@ $view = new Template();
 echo $view-> render('views/home.html');
 });
 
+//home route for navbar
+$f3->route('GET /home', function (){
+
+    $view = new Template();
+    echo $view-> render('views/home.html');
+});
+
 //define "About" page route
 $f3->route('GET /about', function (){
 
