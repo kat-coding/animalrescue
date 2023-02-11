@@ -5,28 +5,23 @@
     width: auto;
 }
 .nav-link{
-    color: black !important;
+    color: white !important;
     font-family: Verdana;
     font-size: large;
 }
 .navbar{
-    background-color: gray;
-}
-.navbar-toggler-icon{
-    color: black !important;
-}
-
-img {
-    max-width:100%;
-    height:auto;
-    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.2) !important;
 }
 .img-div{
     justify-content: center;
 }
-
+body{
+    background-color: black;
+}
 .description{
-    background-color: #dbfdb4;
-    border-radius: 20px;
+    background-color: #70c27a;
+
+}
+.pad-text{
     padding: 5px;
 }
