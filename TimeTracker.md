@@ -10,3 +10,12 @@ Format: date,Time worked on project, Who was there(initals).
 
 01/27/2023,1 hour ,AB, DB, KW (planning meeting) . 
 
+2/2/2023 2hrs DB (home page layout and content)
+
+2/3/2023 3 hrs DB (added about page, improved responsiveness, added content)
+
+2/10/2023 1hr DB (more content and adjusting pictures)
+
+2/11/2023 1/2 hr DB
+
+
