@@ -108,7 +108,7 @@ $f3->route('GET|POST /lostpet', function ($f3){
             $f3->reroute('summary');
         }
     }
-
+    $f3->set("states", getState());
     $view = new Template();
     echo $view-> render('views/lostpet.html');
 });

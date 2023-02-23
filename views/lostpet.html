@@ -4,12 +4,15 @@ Authors: Katherine Watkins,
 Lost pet form page with included header and footer
 -->
 <include href="views/header.html"></include>
+<br>
+<h2 class="about-title text-center">Post A Lost Pet</h2>
+<p class="text text-center">Post information about your lost pet. Including location and a picture can help reunite you with your pet sooner.</p>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="container-fluid">
         <div class="row">
-            <h4>Owner's Information</h4>
+            <h4 class="about-title text-center">Owner's Information</h4>
             <div class="col-lg-4">
-                <label for="fname" class="form-label">First name:</label><br>
+                <label for="fname" class="form-label text">First name:</label><br>
                 <input type="text" id="fname" name="fname" class="form-control" value="{{ @SESSION.fname }}">
 
                 <check if="{{ isset( @errors['fname'])}}">
@@ -17,7 +20,7 @@ Lost pet form page with included header and footer
                 </check>
             </div>
             <div class="col-lg-4">
-                <label for="lname" class="form-label">Last name:</label><br>
+                <label for="lname" class="form-label text">Last name:</label><br>
                 <input type="text" id="lname" name="lname" class="form-control" value="{{ @SESSION.lname }}">
 
                 <check if="{{ isset( @errors['lname'])}}">
@@ -25,13 +28,78 @@ Lost pet form page with included header and footer
                 </check>
             </div>
             <div class="col-lg-4">
-                <label for="phone" class="form-label">Phone:</label><br>
+                <label for="email" class="form-label text">Email:</label><br>
+                <input type="email" id="email" name="email" class="form-control" value="{{ @SESSION.email }}">
+
+                <check if="{{ isset( @errors['email'])}}">
+                    <span class="text-danger">{{ @errors['email'] }}</span>
+                </check>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label for="phone" class="form-label text">Phone:</label><br>
                 <input type="tel" id="phone" name="phone" class="form-control" value="{{ @SESSION.phone}}">
 
                 <check if="{{ isset( @errors['phone'])}}">
                     <span class="text-danger">{{ @errors['phone'] }}</span>
+            </div>
+            <div class="col-lg-4">
+                <label for="lname" class="form-label text">City:</label><br>
+                <input type="text" id="city" name="city" class="form-control" value="{{ @SESSION.city }}">
+
+                <check if="{{ isset( @errors['city'])}}">
+                    <span class="text-danger">{{ @errors['city'] }}</span>
                 </check>
             </div>
+            <div class="col-lg-4">
+                <label for="state" class="form-label text">State:</label><br>
+                <select class="form-select" name="state" id="state">
+                    <option value="" selected="selected">Select a State</option>
+                    <repeat group="{{ @states }}" key="{{ @key }}" value="{{ @val }}">
+                        <option value="{{ @key }}"> {{ @val }} </option>
+                    </repeat>
+                </select>
+
+                <check if="{{ isset( @errors['state'])}}">
+                    <span class="text-danger">{{ @errors['state'] }}</span>
+                </check>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <h4 class="about-title text-center">Pet's Information</h4>
+            <div class="col-lg-4">
+                <label for="pname" class="form-label text">Name:</label><br>
+                <input type="text" id="pname" name="pname" class="form-control" value="{{ @SESSION.pname }}">
+
+                <check if="{{ isset( @errors['pname'])}}">
+                    <span class="text-danger">{{ @errors['pname'] }}</span>
+                </check>
+            </div>
+            <div class="col-lg-4">
+                <label for="lname" class="form-label text">Species:</label><br>
+                <input type="text" id="lname" name="lname" class="form-control" value="{{ @SESSION.lname }}">
+
+                <check if="{{ isset( @errors['lname'])}}">
+                    <span class="text-danger">{{ @errors['lname'] }}</span>
+                </check>
+            </div>
+            <div class="col-lg-4">
+                <label for="file" class="form-label text">Select Image to Upload:</label>
+                <input class="text" id="file" type="file" name="file">
+
+                <check if="{{ isset( @errors['imageError'])}}">
+                    <span class="text-danger">{{ @errors['imageError'] }}</span>
+                </check>
+            </div>
+        </div><br>
+
+
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary next-button">Next</button>
         </div>
     </div>
 </form>
