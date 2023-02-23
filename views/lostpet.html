@@ -1,0 +1,40 @@
+<!--
+SDEV 328
+Authors: Katherine Watkins,
+Lost pet form page with included header and footer
+-->
+<include href="views/header.html"></include>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="container-fluid">
+        <div class="row">
+            <h4>Owner's Information</h4>
+            <div class="col-lg-4">
+                <label for="fname" class="form-label">First name:</label><br>
+                <input type="text" id="fname" name="fname" class="form-control" value="{{ @SESSION.fname }}">
+
+                <check if="{{ isset( @errors['fname'])}}">
+                    <span class="text-danger">{{ @errors['fname'] }}</span>
+                </check>
+            </div>
+            <div class="col-lg-4">
+                <label for="lname" class="form-label">Last name:</label><br>
+                <input type="text" id="lname" name="lname" class="form-control" value="{{ @SESSION.lname }}">
+
+                <check if="{{ isset( @errors['lname'])}}">
+                    <span class="text-danger">{{ @errors['lname'] }}</span>
+                </check>
+            </div>
+            <div class="col-lg-4">
+                <label for="phone" class="form-label">Phone:</label><br>
+                <input type="tel" id="phone" name="phone" class="form-control" value="{{ @SESSION.phone}}">
+
+                <check if="{{ isset( @errors['phone'])}}">
+                    <span class="text-danger">{{ @errors['phone'] }}</span>
+                </check>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<include href="views/footer.html"></include>

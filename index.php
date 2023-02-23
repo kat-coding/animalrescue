@@ -10,6 +10,12 @@ session_start();
 
 //require autoload file created by composer
 require_once("vendor/autoload.php");
+//require database file
+// NOTE: This will be different for each member's version of the site.
+require '/home/katheri9/db.php';
+//require model files
+require_once("model/datalayer.php");
+require_once("model/validate.php");
 
 //Create an instance of the base class of fat-free
 $f3 = Base::instance();
@@ -58,24 +64,53 @@ $f3->route('GET /resources', function (){
 });
 
 
-//application form route
-$f3->route('GET|POST /apply', function ($f3){
+//lost pet form route
+$f3->route('GET|POST /lostpet', function ($f3){
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-$_SESSION['name'] = $_POST['name'];
-$_SESSION['age'] = $_POST['age'];
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $email = $_POST['email'];
+        $state = $_POST['state'];
+        $phone = $_POST['phone'];
 
-$f3->reroute('summary');
-}
+        if (validName($fname)){
+            $_SESSION['fname'] = $fname;
+        }else{
+        $f3->set('errors["fname"]', 'First name is invalid');
+        }
 
-$view = new Template();
-echo $view-> render('views/apply.html');
-});
+        if (validName($lname)){
+            $_SESSION['lname'] = $lname;
+        }else{
+            $f3->set('errors["lname"]', 'Last name is invalid');
+        }
 
-//order form route
-$f3->route('GET /summary', function (){
-$view = new Template();
-echo $view-> render('views/summary.html');
+        if (validEmail($email)){
+            $_SESSION['email'] = $email;
+        }else{
+            $f3->set('errors["email"]', 'Email is invalid');
+        }
+
+        if (validState($state)){
+            $_SESSION['state'] = $state;
+        }else{
+        $f3->set('errors["state"]', 'State must be selected');
+        }
+
+        if (validPhone($phone)){
+            $_SESSION['phone'] = $phone;
+        }else{
+            $f3->set('errors["phone"]', 'Phone number is invalid');
+        }
+
+        if(empty($f3->get('errors'))) {
+            $f3->reroute('summary');
+        }
+    }
+
+    $view = new Template();
+    echo $view-> render('views/lostpet.html');
 });
 
 //run instance of fat-free
