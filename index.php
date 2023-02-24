@@ -12,7 +12,7 @@ session_start();
 require_once("vendor/autoload.php");
 //require database file
 // NOTE: This will be different for each member's version of the site.
-require '/home/katheri9/db.php';
+//require '/home/katheri9/db.php';
 //require model files
 require_once("model/datalayer.php");
 require_once("model/validate.php");
