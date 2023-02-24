@@ -73,6 +73,8 @@ $f3->route('GET|POST /lostpet', function ($f3){
         $email = $_POST['email'];
         $state = $_POST['state'];
         $phone = $_POST['phone'];
+        $imgURL = "";
+        $statusMsg = "";
 
         if (validName($fname)){
             $_SESSION['fname'] = $fname;
@@ -103,6 +105,32 @@ $f3->route('GET|POST /lostpet', function ($f3){
         }else{
             $f3->set('errors["phone"]', 'Phone number is invalid');
         }
+        $targetDir = "upload-img/";
+        $fileName = basename($_FILES["file"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+        $_SESSION['file']= $_FILES["file"]["name"];
+        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+            //allow certain file formats
+            $allowTypes = array('jpg','png','jpeg','gif','pdf');
+            if(in_array($fileType, $allowTypes)){
+                //upload file to server
+                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+                    $statusMsg = "The file ".$fileName. " has been uploaded.";
+                    $_SESSION['imgURL'] = $targetFilePath;
+
+                }else{
+                    $statusMsg = "Sorry, there was an error uploading your file.";
+                    $f3->set('errors["imgUpload"]', $statusMsg);
+                }
+            }else{
+                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+                $f3->set('errors["imgUpload"]', $statusMsg);
+            }
+        }else{
+            $statusMsg = 'Please select a file to upload.';
+            $f3->set('errors["imgUpload"]', $statusMsg);
+        }
 
         if(empty($f3->get('errors'))) {
             $f3->reroute('summary');
@@ -111,6 +139,14 @@ $f3->route('GET|POST /lostpet', function ($f3){
     $f3->set("states", getState());
     $view = new Template();
     echo $view-> render('views/lostpet.html');
+});
+
+$f3->route('GET|POST /summary', function (){
+var_dump($_SESSION);
+echo "<br>";
+var_dump($_FILES["file"]["name"]);
+//    $view = new Template();
+//    echo $view-> render('views/summary.html');
 });
 
 //run instance of fat-free
