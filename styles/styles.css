@@ -39,3 +39,15 @@ body{
 .text{
     color: white;
 }
+.summary{
+    background-color: white !important;
+}
+.img-thumbnail{
+    width: 200px;
+    height: auto;
+}
+.btn-primary{
+    background-color: #70c27a;
+    border-color: #70c27a;
+    color: black;
+}

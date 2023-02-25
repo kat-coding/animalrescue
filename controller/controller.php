@@ -95,9 +95,9 @@ class Controller
     }
     function summary()
     {
-        var_dump($_SESSION);
-//        $view = new Template();
-//        echo $view-> render('views/summary.html');
+//        var_dump($_SESSION);
+        $view = new Template();
+        echo $view-> render('views/summary.html');
     }
 
     /**
