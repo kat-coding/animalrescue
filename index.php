@@ -55,11 +55,11 @@ $f3->route('GET /missing', function (){
     $view = new Template();
     echo $view-> render('views/missing.html');
 });
-//define "Missing Pets Application" page route
-$f3->route('GET /missingPost', function (){
+//define "Missing Pets info" page route
+$f3->route('GET /missingPostInfo', function (){
 
     $view = new Template();
-    echo $view-> render('views/missingPost.html');
+    echo $view-> render('views/missingPostInfo.html');
 });
 //define "Resources" page route
 $f3->route('GET /resources', function (){
