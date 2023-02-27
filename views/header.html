@@ -33,14 +33,17 @@ Includes navbar and all opening html tags and stylesheets necessary for views, s
                 <li class="nav-item">
                     <a class="nav-link" href="about">About Us</a>
                 </li>
+                <!--<check if="{{ @missing}}">
+                    <a href="missingPost">Lost pet Application</a>
+                </check>-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Search Pets
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Adoptable Pets</a></li>
-                        <li><a class="dropdown-item" href="#">Missing Pets</a></li>
-                        <li><a class="dropdown-item" href="#">Found Pets</a></li>
+                        <li><a class="dropdown-item" href="missing">Missing Pets</a></li>
+                        <li><a class="dropdown-item" href="foundpets">Found Pets</a></li>
                     </ul>
                 </li>
             </ul>

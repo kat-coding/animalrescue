@@ -10,58 +10,83 @@ session_start();
 
 //require autoload file created by composer
 require_once("vendor/autoload.php");
-//require database file
-// NOTE: This will be different for each member's version of the site.
-//require '/home/katheri9/db.php';
-//require model files
-require_once("model/datalayer.php");
-require_once("model/validate.php");
 
 //Create an instance of the base class of fat-free
 $f3 = Base::instance();
-//initiate controller object
-$con = new Controller($f3);
 
 
 //define default route -> home.html
 $f3->route('GET /', function (){
-    $GLOBALS["con"]->home();
+
+$view = new Template();
+echo $view-> render('views/home.html');
 });
 
 //home route for navbar
 $f3->route('GET /home', function (){
-    $GLOBALS["con"]->home();
+
+    $view = new Template();
+    echo $view-> render('views/home.html');
 });
 
 //define "About" page route
 $f3->route('GET /about', function (){
-    $GLOBALS["con"]->about();
+
+$view = new Template();
+echo $view-> render('views/about.html');
 });
 
 //define "Available Pets" page route
 $f3->route('GET /availablepets', function (){
-    $GLOBALS["con"]->availablepets();
+
+$view = new Template();
+echo $view-> render('views/availablepets.html');
 });
 
 //define "Found Pets" page route
 $f3->route('GET /foundpets', function (){
-    $GLOBALS["con"]->foundpets();
-});
 
+    $view = new Template();
+    echo $view-> render('views/foundpets.html');
+});
+//define "Missing Pets" page route
+$f3->route('GET /missing', function (){
+
+    $view = new Template();
+    echo $view-> render('views/missing.html');
+});
+//define "Missing Pets Application" page route
+$f3->route('GET /missingPost', function (){
+
+    $view = new Template();
+    echo $view-> render('views/missingPost.html');
+});
 //define "Resources" page route
 $f3->route('GET /resources', function (){
-    $GLOBALS["con"]->resources();
+
+    $view = new Template();
+    echo $view-> render('views/resources.html');
+});
+//
+
+//application form route
+$f3->route('GET|POST /apply', function ($f3){
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+$_SESSION['name'] = $_POST['name'];
+$_SESSION['age'] = $_POST['age'];
+
+$f3->reroute('summary');
+}
+
+$view = new Template();
+echo $view-> render('views/apply.html');
 });
 
-
-//lost pet form route
-$f3->route('GET|POST /lostpet', function ($f3){
-    $GLOBALS["con"]->lostpet();
-});
-
-$f3->route('GET|POST /summary', function (){
-    //TODO change summary function when summary page finished
-    $GLOBALS["con"]->summary();
+//order form route
+$f3->route('GET /summary', function (){
+$view = new Template();
+echo $view-> render('views/summary.html');
 });
 
 //run instance of fat-free
