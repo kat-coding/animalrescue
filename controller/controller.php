@@ -141,8 +141,10 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
-    function loginroute()
+    function loginroute($f3)
     {
+        $f3->set('username', sha1('syntaxians'));
+        $f3->set('password', sha1('catdog'));
         $view = new Template();
         echo $view->render('admin/login.php');
     }
