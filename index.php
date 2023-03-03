@@ -5,28 +5,27 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-//start session
-session_start();
-
 //require autoload file created by composer
 require_once("vendor/autoload.php");
+
+//start session
+session_start();
 
 //Create an instance of the base class of fat-free
 $f3 = Base::instance();
 
+//Instantiate a controller object
+$con = new Controller($f3);
 
 //define default route -> home.html
-$f3->route('GET /', function (){
-
-$view = new Template();
-echo $view-> render('views/home.html');
+$f3->route('GET /', function ()
+{
+    $GLOBALS['con']->home();
 });
 
 //home route for navbar
 $f3->route('GET /home', function (){
-
-    $view = new Template();
-    echo $view-> render('views/home.html');
+    $GLOBALS['con']->home();
 });
 
 //define "About" page route
@@ -40,9 +39,14 @@ echo $view-> render('views/about.html');
 $f3->route('GET /availablepets', function (){
 
 $view = new Template();
-echo $view-> render('views/availablepets.html');
+echo $view-> render('views/adoptablepets.html');
 });
 
+//admin login route
+$f3->route('GET /login', function(){
+   $view = new Template();
+   echo $view->render('admin/login');
+});
 //define "Found Pets" page route
 $f3->route('GET /foundpets', function (){
 

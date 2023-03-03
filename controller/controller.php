@@ -27,7 +27,7 @@ class Controller
     function availablepets()
     {
         $view = new Template();
-        echo $view-> render('views/availablepets.html');
+        echo $view-> render('views/adoptablepets.html');
     }
     function foundpets()
     {
@@ -38,6 +38,12 @@ class Controller
     {
         $view = new Template();
         echo $view-> render('views/resources.html');
+    }
+
+    function login()
+    {
+        $view = new Template();
+        echo $view->render('admin/login.php');
     }
     function lostpet()
     {
