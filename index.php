@@ -18,50 +18,44 @@ $f3 = Base::instance();
 $con = new Controller($f3);
 
 //define default route -> home.html
-$f3->route('GET /', function ()
+$f3->route('GET /', function()
 {
     $GLOBALS['con']->home();
 });
 
 //home route for navbar
-$f3->route('GET /home', function (){
+$f3->route('GET /home', function()
+{
     $GLOBALS['con']->home();
 });
 
 //define "About" page route
-$f3->route('GET /about', function (){
-
-$view = new Template();
-echo $view-> render('views/about.html');
+$f3->route('GET /about', function()
+{
+    $GLOBALS['con']->about();
 });
 
 //define "Available Pets" page route
-$f3->route('GET /availablepets', function (){
-
-$view = new Template();
-echo $view-> render('views/adoptablepets.html');
+$f3->route('GET /adoptable', function()
+{
+    $GLOBALS['con']->availablepets();
 });
 
-//admin login route
-$f3->route('GET /login', function(){
-   $view = new Template();
-   echo $view->render('admin/login');
-});
 //define "Found Pets" page route
-$f3->route('GET /foundpets', function (){
-
-    $view = new Template();
-    echo $view-> render('views/foundpets.html');
+$f3->route('GET /foundpets', function()
+{
+    $GLOBALS['con']->foundpets();
 });
+
 //define "Missing Pets" page route
-$f3->route('GET /missing', function (){
-
-    $view = new Template();
-    echo $view-> render('views/missing.html');
+$f3->route('GET /missingpets', function ()
+{
+    $GLOBALS['con']->missingpets();
 });
-//define "Missing Pets info" page route
-$f3->route('GET /missingPostInfo', function (){
 
+//define "Missing Pets info" page route
+$f3->route('GET /missingPostInfo', function ()
+{
     $view = new Template();
     echo $view-> render('views/missingPostInfo.html');
 });
@@ -93,5 +87,10 @@ $view = new Template();
 echo $view-> render('views/summary.html');
 });
 
+//admin login route
+$f3->route('GET /login', function(){
+    $view = new Template();
+    echo $view->render('admin/login');
+});
 //run instance of fat-free
 $f3->run();

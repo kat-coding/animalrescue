@@ -27,24 +27,26 @@ class Controller
     function availablepets()
     {
         $view = new Template();
-        echo $view-> render('views/adoptablepets.html');
+        echo $view-> render('views/adoptable.html');
     }
     function foundpets()
     {
         $view = new Template();
-        echo $view-> render('views/foundpets.html');
+        echo $view-> render('views/found.html');
     }
+    function missingpets()
+    {
+        $view = new Template();
+        echo $view-> render('views/missing.html');
+    }
+
     function resources()
     {
         $view = new Template();
         echo $view-> render('views/resources.html');
     }
 
-    function login()
-    {
-        $view = new Template();
-        echo $view->render('admin/login.php');
-    }
+
     function lostpet()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -139,5 +141,9 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
-
+    function login()
+    {
+        $view = new Template();
+        echo $view->render('admin/login.php');
+    }
 }
