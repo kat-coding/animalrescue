@@ -141,7 +141,7 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
-    function login()
+    function loginroute()
     {
         $view = new Template();
         echo $view->render('admin/login.php');

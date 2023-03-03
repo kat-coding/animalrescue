@@ -88,9 +88,9 @@ echo $view-> render('views/summary.html');
 });
 
 //admin login route
-$f3->route('GET /login', function(){
+$f3->route('GET /loginroute', function(){
     $view = new Template();
-    echo $view->render('admin/login');
+    echo $view->render('admin/login.php');
 });
 //run instance of fat-free
 $f3->run();
