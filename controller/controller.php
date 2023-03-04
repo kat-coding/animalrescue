@@ -97,7 +97,7 @@ class Controller
                 $this->_f3->reroute('summary');
             }
         }
-        $this->_f3->set("states", getState());
+        $this->_f3->set("states", Datalayer::getState());
         $view = new Template();
         echo $view-> render('views/lostpet.html');
     }

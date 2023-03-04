@@ -8,7 +8,7 @@ function validPhone($phone){
     return preg_match($pattern, $phone);
 }
 function validState($state){
-    return array_key_exists($state, getState());
+    return array_key_exists($state, DataLayer::getState());
 }
 
 function validEmail($email){
