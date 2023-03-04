@@ -143,6 +143,9 @@ class Controller
     }
     function loginroute($f3)
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            echo 'You want to go to admin page.';
+        }
         $f3->set('username', sha1('syntaxians'));
         $f3->set('password', sha1('catdog'));
         $view = new Template();
