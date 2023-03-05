@@ -15,3 +15,7 @@ function validEmail($email){
     $pattern = "^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$^";
     return preg_match($pattern, $email);
 }
+
+function validLogin($login){
+
+}

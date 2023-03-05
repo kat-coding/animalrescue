@@ -149,6 +149,6 @@ class Controller
         $f3->set('username', sha1('syntaxians'));
         $f3->set('password', sha1('catdog'));
         $view = new Template();
-        echo $view->render('admin/login.php');
+        echo $view->render('views/login.html');
     }
 }
