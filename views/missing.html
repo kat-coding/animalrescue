@@ -21,13 +21,13 @@ and missing pets so others can help find them
     <tbody>
     <repeat group="{{ @LostPets }}" value="{{ @LostPets }}">
         <tr>
-            <th><img src="{{ @LostPets['Image'] }}" alt="animals Image"></th>
+            <th><img src="{{ @LostPets['ImgUrl'] }}" alt="animals Image"></th>
             <th>{{ @LostPets['Name'] }} </th>
             <th>{{ @LostPets['Age'] }}</th>
             <th>{{ @LostPets['Species'] }}</th>
-            <th>{{ @LostPets['Location'] }}</th>
-            <th>{{ @LostPets['Description']}</th>
-            <th><button ></button></th>//PetID
+            <th>{{ @LostPets['City'] }}, {{ @LostPets['State'] }}</th>
+            <th>{{ @LostPets['Description']}}</th>
+            <th><button ></button></th><!--PetID-->
         </tr>
     </repeat>
 

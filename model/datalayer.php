@@ -19,7 +19,7 @@ class DataLayer
     function getLostPets()
     {
         //1. Define the query
-        $sql = "SELECT * FROM pets join LostPet where LostPet.LostId=pets.PetID";
+        $sql = "SELECT * FROM pets, lostPets where lostPets.PetID=pets.PetID";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
