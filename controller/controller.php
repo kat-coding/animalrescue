@@ -36,6 +36,9 @@ class Controller
     }
     function missingpets()
     {
+        //Get the data from the model
+        $lost= $GLOBALS['dataLayer']->getLostPets();
+        $this->_f3->set('LostPets', $lost);
         $view = new Template();
         echo $view-> render('views/missing.html');
     }

@@ -16,7 +16,7 @@ $f3 = Base::instance();
 
 //Instantiate a controller object
 $con = new Controller($f3);
-
+$dataLayer = new DataLayer();
 //define default route -> home.html
 $f3->route('GET /', function()
 {

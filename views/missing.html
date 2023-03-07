@@ -6,5 +6,72 @@ and missing pets so others can help find them
 
 <include href="views/header.html"></include>
 <br>
-<h1>Missing Pets page</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Species</th>
+        <th scope="col">Location</th>
+        <th scope="col">Description</th>
+        <th scope="col">More Info</th>
+    </tr>
+    </thead>
+    <tbody>
+    <repeat group="{{ @LostPets }}" value="{{ @LostPets }}">
+        <tr>
+            <th><img src="{{ @LostPets['Image'] }}" alt="animals Image"></th>
+            <th>{{ @LostPets['Name'] }} </th>
+            <th>{{ @LostPets['Age'] }}</th>
+            <th>{{ @LostPets['Species'] }}</th>
+            <th>{{ @LostPets['Location'] }}</th>
+            <th>{{ @LostPets['Description']}</th>
+            <th><button ></button></th>//PetID
+        </tr>
+    </repeat>
+
+    </tbody>
+</table>
+<!--<div class="container">
+    <h1>Admin Page</h1>
+    <repeat group="{{ @orders }}" value="{{ @order }}">
+        <p>OrderID: {{ @order['orderId'] }}<br>
+            Food: {{ @order['food'] }}<br>
+            Meal: {{ @order['meal'] }}<br>
+            Condiments: {{ @order['conds'] }}<br>
+        </p>
+    </repeat>
+</div>-->
+
+<!--<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>-->
 <include href="views/footer.html"></include>
