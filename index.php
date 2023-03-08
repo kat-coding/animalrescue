@@ -79,10 +79,13 @@ $view = new Template();
 echo $view-> render('views/summary.html');
 });
 
+$f3->route('GET /adminpage', function ($f3){
+    $GLOBALS['con']->adminpage();
+});
+
 //admin login route
 $f3->route('GET|POST /loginroute', function(){
-    $view = new Template();
-    echo $view->render('views/login.html');
+    $GLOBALS['con']->loginroute();
 });
 //run instance of fat-free
 $f3->run();

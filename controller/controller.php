@@ -42,7 +42,6 @@ class Controller
     }
     function missingpets()
     {
-
         //Get the data from the model
         $lost= $GLOBALS['dataLayer']->getLostPets();
         $this->_f3->set('LostPets', $lost);
@@ -155,20 +154,25 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
-    function adminpage($f3)
+    function adminpage()
     {
         $view = new Template();
         echo $view->render('views/admin.html');
     }
 
 
-    function loginroute($f3)
+    function loginroute()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo 'You want to go to admin page.';
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            if(validUser($username) && validPassword($password)){
+                $this->_f3->reroute('adminpage');
+            }
+
         }
-        $f3->set('username', sha1('syntaxians'));
-        $f3->set('password', sha1('catdog'));
+       // $this->_f3->set('username', sha1('syntaxians'));
+        //$this->_f3->set('password', sha1('catdog'));
         $view = new Template();
         echo $view->render('views/login.html');
     }

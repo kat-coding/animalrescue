@@ -24,9 +24,14 @@ class Validate
         return preg_match($pattern, $email);
     }
 
-    function validLogin($login)
+    function validUser($username)
     {
+        return $username == 'syntaxians';
+    }
 
+    function validPassword($password)
+    {
+        return $password == 'catdog';
     }
 
     function validURL()
