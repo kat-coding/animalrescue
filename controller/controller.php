@@ -176,4 +176,17 @@ class Controller
         $view = new Template();
         echo $view->render('views/login.html');
     }
+
+    function newShelterPet()
+    {
+        $view = new Template();
+        echo $view->render('views/addShelterPet.html');
+    }
+/*
+ *     function adminpage()
+    {
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
+ */
 }

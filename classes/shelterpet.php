@@ -5,7 +5,7 @@ class ShelterPet extends Pets{
     private $_goodWithOtherPets;
     private $_healthConditions;
 
-    function __construct($status, $goodWithKids, $goodWithOtherPets, $healthConditions){
+    function __construct($status="unknown", $goodWithKids="unknown", $goodWithOtherPets="unknown", $healthConditions="unknown"){
         parent::__construct($name="?", $age="?", $sex="?", $species="?");
         $this->_status = $status;
         $this->_goodWithKids = $goodWithKids;

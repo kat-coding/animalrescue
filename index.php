@@ -84,6 +84,11 @@ $f3->route('GET /adminpage', function ($f3){
 });
 
 //admin login route
+$f3->route('GET /newShelterPet', function(){
+    $GLOBALS['con']->newShelterPet();
+});
+
+//admin login route
 $f3->route('GET|POST /loginroute', function(){
     $GLOBALS['con']->loginroute();
 });
