@@ -67,21 +67,13 @@ $f3->route('GET /resources', function (){
 });
 //
 
-//application form route
-$f3->route('GET|POST /apply', function ($f3){
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-$_SESSION['name'] = $_POST['name'];
-$_SESSION['age'] = $_POST['age'];
-
-$f3->reroute('summary');
-}
-
-$view = new Template();
-echo $view-> render('views/apply.html');
+//lostpet form route
+$f3->route('GET|POST /lostpet', function ($f3){
+    $GLOBALS['con']->lostpet();
 });
 
-//order form route
+
+//summary route
 $f3->route('GET /summary', function (){
 $view = new Template();
 echo $view-> render('views/summary.html');
