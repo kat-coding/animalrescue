@@ -1,6 +1,7 @@
 <?php
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/../pdo-config.php');
+
 class DataLayer
 {
     // Database connection object

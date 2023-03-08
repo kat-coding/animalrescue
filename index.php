@@ -88,7 +88,7 @@ echo $view-> render('views/summary.html');
 });
 
 //admin login route
-$f3->route('GET /loginroute', function(){
+$f3->route('GET|POST /loginroute', function(){
     $view = new Template();
     echo $view->render('views/login.html');
 });
