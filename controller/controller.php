@@ -155,6 +155,13 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
+    function adminpage($f3)
+    {
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
+
+
     function loginroute($f3)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
