@@ -28,4 +28,9 @@ class Validate
     {
 
     }
+
+    function validURL()
+    {
+        return true;
+    }
 }

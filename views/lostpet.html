@@ -11,6 +11,7 @@ Lost pet form page with included header and footer
     <div class="container-fluid">
         <div class="row">
             <h4 class="about-title text-center">Owner's Information</h4>
+<!--Owner Name-->
             <div class="col-lg-4">
                 <label for="fname" class="form-label text">First name:</label><br>
                 <input type="text" id="fname" name="fname" class="form-control" value="{{ @SESSION.fname }}">
@@ -27,6 +28,7 @@ Lost pet form page with included header and footer
                     <span class="text-danger">{{ @errors['lname'] }}</span>
                 </check>
             </div>
+<!--Owner Email-->
             <div class="col-lg-4">
                 <label for="email" class="form-label text">Email:</label><br>
                 <input type="email" id="email" name="email" class="form-control" value="{{ @SESSION.email }}">
@@ -37,7 +39,7 @@ Lost pet form page with included header and footer
             </div>
         </div>
 
-
+<!--Owner Phone-->
         <div class="row">
             <div class="col-lg-4">
                 <label for="phone" class="form-label text">Phone:</label><br>
@@ -47,6 +49,7 @@ Lost pet form page with included header and footer
                     <span class="text-danger">{{ @errors['phone'] }}</span>
                 </check>
             </div>
+<!--Owner City-->
             <div class="col-lg-4">
                 <label for="lname" class="form-label text">City:</label><br>
                 <input type="text" id="city" name="city" class="form-control" value="{{ @SESSION.city }}">
@@ -55,6 +58,7 @@ Lost pet form page with included header and footer
                     <span class="text-danger">{{ @errors['city'] }}</span>
                 </check>
             </div>
+<!--Owner State-->
             <div class="col-lg-4">
                 <label for="state" class="form-label text">State:</label><br>
                 <select class="form-select" name="state" id="state">
@@ -73,6 +77,7 @@ Lost pet form page with included header and footer
         <div class="row">
             <h4 class="about-title text-center">Pet's Information</h4>
             <div class="col-lg-4">
+<!--Pet Name-->
                 <label for="pname" class="form-label text">Name:</label><br>
                 <input type="text" id="pname" name="pname" class="form-control" value="{{ @SESSION.pname }}">
 
@@ -80,20 +85,57 @@ Lost pet form page with included header and footer
                     <span class="text-danger">{{ @errors['pname'] }}</span>
                 </check>
             </div>
+<!--Species-->
             <div class="col-lg-4">
                 <label for="lname" class="form-label text">Species:</label><br>
                 <input type="text" id="species" name="species" class="form-control" value="{{ @SESSION.species }}">
 
-                <check if="{{ isset( @errors['lname'])}}">
+                <check if="{{ isset( @errors['species'])}}">
                     <span class="text-danger">{{ @errors['species'] }}</span>
                 </check>
             </div>
+            <div class="col-lg-4">
+                <!--Pet Age-->
+                <label for="pname" class="form-label text">Age:</label><br>
+                <input type="text" id="age" name="age" class="form-control" value="{{ @SESSION.age }}">
+
+                <check if="{{ isset( @errors['age'])}}">
+                    <span class="text-danger">{{ @errors['age'] }}</span>
+                </check>
+            </div>
+        </div><br>
+
+        <div class="row">
+
+            <!--Sex-->
+            <div class="col-lg-4">
+                <label for="sex" class="form-label text">Sex:</label><br>
+                <input type="text" id="sex" name="sex" class="form-control" value="{{ @SESSION.sex }}">
+
+                <check if="{{ isset( @errors['sex'])}}">
+                    <span class="text-danger">{{ @errors['sex'] }}</span>
+                </check>
+            </div>
+            <!--Image-->
             <div class="col-lg-4">
                 <label for="file" class="form-label text">Select Image to Upload:</label>
                 <input class="text" id="file" type="file" name="file">
 
                 <check if="{{ isset( @errors['imageError'])}}">
                     <span class="text-danger">{{ @errors['imageError'] }}</span>
+                </check>
+            </div>
+        </div><br>
+
+        <div class="row">
+
+            <!--Species-->
+            <div class="col-lg-12">
+                <label for="description" class="form-label text">Description:</label><br>
+                <textarea id="description" name="description" class="form-control" rows="5">{{ @SESSION.description}}</textarea>
+
+                <check if="{{ isset( @errors['description'])}}">
+                    <span class="text-danger">{{ @errors['description'] }}</span>
                 </check>
             </div>
         </div><br>
