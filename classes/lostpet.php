@@ -6,7 +6,7 @@ class LostPet extends Pets{
     private $_dateMissing;
 
     function __construct($ownerName, $email, $phone, $dateMissing){
-        parent::__construct();
+        parent::__construct($name="?", $age="?", $sex="?", $species="?");
         $this->_ownerName = $ownerName;
         $this->_email = $email;
         $this->_phone = $phone;
