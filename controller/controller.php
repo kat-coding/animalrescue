@@ -26,6 +26,12 @@ class Controller
     }
     function availablepets()
     {
+        $availablepets= $GLOBALS['dataLayer']->getavailablepets();
+        $this->_f3->set('availablepets', $availablepets);
+        echo "<pre>";
+        var_dump($_POST);
+        var_dump($availablepets);
+        echo "</pre>";
         $view = new Template();
         echo $view-> render('views/adoptable.html');
     }
