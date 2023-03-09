@@ -100,7 +100,7 @@ class Pets
     {
         $this->_imgUrl = $imgUrl;
     }
-    function getDescriptiom()
+    function getDescription()
     {
         return $this->_description;
     }

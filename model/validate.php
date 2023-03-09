@@ -36,14 +36,33 @@ class Validate
 
     static function validIMGURL($imgURL)
     {
-        $folder = substr($imgURL, 0, 10);
-        $regex = '/^upload-img/$/i';
-        if(!preg_match($regex, $folder)){
+        $folder = substr($imgURL, 0, 11);
+        $string = 'upload-img/';
+        if($folder != $string){
             return false;
         }
         if($imgURL == 'none'){
             return false;
         }
+        return true;
+    }
+    static function validSpecies($species){
+        //TODO add validation logic
+        return true;
+    }
+    static function validAge($age){
+        return (is_numeric($age) & $age <= 99);
+    }
+    static function validSex($sex){
+        //TODO add validation logic
+        return true;
+    }
+    static function validMissingDate($missingdate){
+        //TODO add date validation
+        return true;
+    }
+    static function validCity($city){
+        //TODO add city validation
         return true;
     }
 }

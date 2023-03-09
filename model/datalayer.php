@@ -61,4 +61,44 @@ class DataLayer
             "SC" => "South Carolina", "SD" => "South Dakota", "TN" => "Tennessee", "TX" => "Texas", "UT" => "Utah",
             "VA" => "Virginia", "WA" => "Washington", "WV" => "West Virginia", "WI" => "Wisconsin", "WY" => "Wyoming");
     }
+    function addLostPet($lostPet){
+        //pet table
+        $Name = $lostPet->getName();
+        $species = $lostPet->getSpecies();
+        $age = $lostPet->getAge();
+        $description = $lostPet->getDescription();
+        $sex = $lostPet->getSex();
+        $state = $lostPet->getState();
+        $city = $lostPet->getCity();
+        //lost pet table
+        $ownerName = $lostPet->getOwnerName();
+        $email = $lostPet->getEmail();
+        $phone = $lostPet->getPhone();
+        $dateMissing = $lostPet->getDateMissing();
+
+
+
+
+    }
+    function insertIntoPets($name, $age, $sex, $species, $description, $imgUrl, $state, $city){
+        //define query
+        $sql = "INSERT INTO `pets`(`Name`, `Age`, `Sex`, `Species`, `Description`, `ImgUrl`, `State`, `City`) 
+                VALUES (:name,:age,:sex,:species,:description,:imgUrl,:state,:city)";
+        //prepare statement
+        $statement = $this->_dbh->prepare($sql);
+        //bind parameters
+        $statement->bindParam(':name', $name);
+        $statement->bindParam(':age', $age);
+        $statement->bindParam(':sex', $sex);
+        $statement->bindParam(':species', $species);
+        $statement->bindParam(':description', $description);
+        $statement->bindParam(':imgUrl', $imgUrl);
+        $statement->bindParam(':state', $state);
+        $statement->bindParam(':city', $city);
+        //execute statement
+        $statement->execute();
+        //get id
+        $id = $this->_dbh->lastInsertId();
+        return $id;
+    }
 }

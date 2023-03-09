@@ -87,7 +87,7 @@ Lost pet form page with included header and footer
             </div>
 <!--Species-->
             <div class="col-lg-4">
-                <label for="lname" class="form-label text">Species:</label><br>
+                <label for="species" class="form-label text">Species:</label><br>
                 <input type="text" id="species" name="species" class="form-control" value="{{ @SESSION.species }}">
 
                 <check if="{{ isset( @errors['species'])}}">
@@ -114,6 +114,15 @@ Lost pet form page with included header and footer
 
                 <check if="{{ isset( @errors['sex'])}}">
                     <span class="text-danger">{{ @errors['sex'] }}</span>
+                </check>
+            </div>
+            <!--Date Missing-->
+            <div class="col-lg-4">
+                <label for="datemissing" class="form-label text">Date Missing:</label><br>
+                <input type="date" id="datemissing" name="datemissing" class="form-control" value="{{ @SESSION.datemissing }}">
+
+                <check if="{{ isset( @errors['datemissing'])}}">
+                    <span class="text-danger">{{ @errors['datemissing'] }}</span>
                 </check>
             </div>
             <!--Image-->
