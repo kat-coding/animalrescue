@@ -26,8 +26,8 @@ class Upload{
                 $con->set('errors["imgUpload"]', $statusMsg);
             }
         }else{
-            $statusMsg = 'Please select a file to upload.';
-            $con->set('errors["imgUpload"]', $statusMsg);
+            //Picture not required so if no file, we will not set an error
+            $targetFilePath = "none";
         }
         return $targetFilePath;
     }

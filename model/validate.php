@@ -34,8 +34,16 @@ class Validate
         return $password == 'catdog';
     }
 
-    static function validURL()
+    static function validIMGURL($imgURL)
     {
+        $folder = substr($imgURL, 0, 10);
+        $regex = '/^upload-img/$/i';
+        if(!preg_match($regex, $folder)){
+            return false;
+        }
+        if($imgURL == 'none'){
+            return false;
+        }
         return true;
     }
 }
