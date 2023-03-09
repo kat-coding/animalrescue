@@ -9,25 +9,25 @@ and missing pets so others can help find them
 <table class="table">
     <thead>
     <tr>
-        <th scope="col">image</th>
-        <th scope="col">Name</th>
-        <th scope="col">Age</th>
-        <th scope="col">Species</th>
-        <th scope="col">Location</th>
-        <th scope="col">Description</th>
-        <th scope="col">More Info</th>
+        <th class="text" scope="col">image</th>
+        <th class="text" scope="col">Name</th>
+        <th class="text" scope="col">Age</th>
+        <th class="text" scope="col">Species</th>
+        <th class="text" scope="col">Location</th>
+        <th class="text" scope="col">Description</th>
+        <th class="text" scope="col">More Info</th>
     </tr>
     </thead>
     <tbody>
     <repeat group="{{ @LostPets }}" value="{{ @LostPets }}">
         <tr>
             <th><img src="{{ @LostPets['ImgUrl'] }}" alt="animals Image"></th>
-            <th>{{ @LostPets['Name'] }} </th>
-            <th>{{ @LostPets['Age'] }}</th>
-            <th>{{ @LostPets['Species'] }}</th>
-            <th>{{ @LostPets['City'] }}, {{ @LostPets['State'] }}</th>
-            <th>{{ @LostPets['Description']}}</th>
-            <th><button ></button></th><!--PetID-->
+            <th class="text">{{ @LostPets['Name'] }} </th>
+            <th class="text">{{ @LostPets['Age'] }}</th>
+            <th class="text">{{ @LostPets['Species'] }}</th>
+            <th class="text">{{ @LostPets['City'] }}, {{ @LostPets['State'] }}</th>
+            <th class="text">{{ @LostPets['Description']}}</th>
+            <th class="text"><button ></button></th><!--PetID-->
         </tr>
     </repeat>
 
