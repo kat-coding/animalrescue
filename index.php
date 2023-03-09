@@ -69,7 +69,7 @@ $f3->route('GET /resources', function (){
 
 //lostpet form route
 $f3->route('GET|POST /lostpet', function ($f3){
-    $GLOBALS['con']->lostpet();
+    $GLOBALS['con']->lostpet($f3);
 });
 
 

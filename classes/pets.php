@@ -7,10 +7,6 @@ class Pets
     private $_sex;
     private $_species;
 
-    //do we need this as a field or just a boolean method?
-    //I included it but have it set to false unless we change it
-    private $_microchip;
-
     private $_city;
     //required but defaulted to WA
     private $_state;
@@ -18,7 +14,7 @@ class Pets
     private $_imgUrl;
     private $_description;
 
-    function __construct($name, $age, $sex, $species, $state="WA")
+    function __construct($name = "", $age = "", $sex ="", $species = "", $state="")
     {
         $this->_name = $name;
         $this->_age = $age;
@@ -26,7 +22,6 @@ class Pets
         $this->_species = $species;
         $this->_state = $state;
         $this->_city = "";
-        $this->_microchip = false;
         $this->_imgUrl = "";
         $this->_description = "";
     }

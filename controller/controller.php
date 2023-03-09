@@ -60,9 +60,10 @@ class Controller
     }
 
 
-    function lostpet()
+    function lostpet($_f3)
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $email = $_POST['email'];
@@ -71,43 +72,46 @@ class Controller
             $imgURL = "";
             $statusMsg = "";
 
-            if (validName($fname)){
+            if (Validate::validName($fname)){
                 $_SESSION['fname'] = $fname;
             }else{
                 $this->_f3->set('errors["fname"]', 'First name is invalid');
             }
 
-            if (validName($lname)){
+            if (Validate::validName($lname)){
                 $_SESSION['lname'] = $lname;
             }else{
                 $this->_f3->set('errors["lname"]', 'Last name is invalid');
             }
 
-            if (validEmail($email)){
+            if (Validate::validEmail($email)){
                 $_SESSION['email'] = $email;
             }else{
                 $this->_f3->set('errors["email"]', 'Email is invalid');
             }
 
-            if (validState($state)){
+            if (Validate::validState($state)){
                 $_SESSION['state'] = $state;
             }else{
                 $this->_f3->set('errors["state"]', 'State must be selected');
             }
 
-            if (validPhone($phone)){
+            if (Validate::validPhone($phone)){
                 $_SESSION['phone'] = $phone;
             }else{
                 $this->_f3->set('errors["phone"]', 'Phone number is invalid');
             }
             //if image uploaded run the upload function in controller
             if(!empty($_FILES["file"]["name"])) {
-                $this->uploadImage();
+                $imgURL = Upload::uploadImage($_f3);
             }
 
 
             if(empty($this->_f3->get('errors'))) {
-                $this->_f3->reroute('summary');
+                $ownerName = $fname." ".$lname;
+                echo $imgURL;
+//                $newLostPet = new LostPet($ownerName, $email, $phone, $dateMissing);
+//                $this->_f3->reroute('summary');
             }
         }
         $this->_f3->set("states", Datalayer::getState());
@@ -124,36 +128,38 @@ class Controller
     /**
      * uploadImage function for client image uploads
      * @return void uploads images to upload-img directory
+     *
+     * THIS WAS MOVED TO UPLOAD CLASS
      */
-    function uploadImage()
-    {
-        $targetDir = "upload-img/";
-        $fileName = basename($_FILES["file"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-        $_SESSION['file']= $_FILES["file"]["name"];
-        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
-            //allow certain file formats
-            $allowTypes = array('jpg','png','jpeg','gif','pdf');
-            if(in_array($fileType, $allowTypes)){
-                //upload file to server
-                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    $statusMsg = "The file ".$fileName. " has been uploaded.";
-                    $_SESSION['imgURL'] = $targetFilePath;
-
-                }else{
-                    $statusMsg = "Sorry, there was an error uploading your file.";
-                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
-                }
-            }else{
-                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-                $this->_f3->set('errors["imgUpload"]', $statusMsg);
-            }
-        }else{
-            $statusMsg = 'Please select a file to upload.';
-            $this->_f3->set('errors["imgUpload"]', $statusMsg);
-        }
-    }
+//    function uploadImage()
+//    {
+//        $targetDir = "upload-img/";
+//        $fileName = basename($_FILES["file"]["name"]);
+//        $targetFilePath = $targetDir . $fileName;
+//        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+//        $_SESSION['file']= $_FILES["file"]["name"];
+//        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+//            //allow certain file formats
+//            $allowTypes = array('jpg','png','jpeg','gif','pdf');
+//            if(in_array($fileType, $allowTypes)){
+//                //upload file to server
+//                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+//                    $statusMsg = "The file ".$fileName. " has been uploaded.";
+//                    $_SESSION['imgURL'] = $targetFilePath;
+//
+//                }else{
+//                    $statusMsg = "Sorry, there was an error uploading your file.";
+//                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
+//                }
+//            }else{
+//                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+//                $this->_f3->set('errors["imgUpload"]', $statusMsg);
+//            }
+//        }else{
+//            $statusMsg = 'Please select a file to upload.';
+//            $this->_f3->set('errors["imgUpload"]', $statusMsg);
+//        }
+//    }
     function adminpage()
     {
         $view = new Template();
