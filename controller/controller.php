@@ -179,8 +179,7 @@ class Controller
     function summary()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $view = new Template();
-            echo $view->render('views/summary.html');
+            $this->_f3->reroute('submit');
 
         }
         else {
@@ -192,14 +191,9 @@ class Controller
     }
     function submit()
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $GLOBALS['dataLayer']->addLostPet($_SESSION['newLostPet']);
-            echo "added to database";
-            session_destroy();
-//            $this->_f3->reroute('home');
-        }else{
-            echo "not added";
-        }
+        $GLOBALS['dataLayer']->addLostPet($_SESSION['newLostPet']);
+        session_destroy();
+        $this->_f3->reroute('missingpets');
     }
 
     /**
