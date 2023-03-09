@@ -241,9 +241,8 @@ class Controller
     function loginroute()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            if(validUser($username) && validPassword($password)){
+
+            if(checkLogin()){
                 $this->_f3->reroute('adminpage');
             }
 
@@ -259,11 +258,11 @@ class Controller
         $view = new Template();
         echo $view->render('views/addShelterPet.html');
     }
-/*
- *     function adminpage()
+
+    function confirm()
     {
         $view = new Template();
-        echo $view->render('views/admin.html');
+        echo $view->render('views/addShelterPet.html');
     }
- */
+
 }

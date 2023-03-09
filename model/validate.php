@@ -24,15 +24,15 @@ class Validate
         return preg_match($pattern, $email);
     }
 
-    static function validUser($username)
+    static function checkLogin($username, $password)
     {
-        return $username == 'syntaxians';
+        return $username == 'syntaxians' && $password == 'catdog';
     }
 
-    static function validPassword($password)
-    {
-        return $password == 'catdog';
-    }
+//    static function validPassword($password)
+//    {
+//        return $password == 'catdog';
+//    }
 
     static function validIMGURL($imgURL)
     {
