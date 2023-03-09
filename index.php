@@ -17,6 +17,21 @@ $f3 = Base::instance();
 //Instantiate a controller object
 $con = new Controller($f3);
 $dataLayer = new DataLayer();
+//$Link = new LostPet();
+//$Link->setOwnerName("Katherine Watkins");
+//$Link->setName("Link");
+//$Link->setDescription("My cat.");
+//$Link->setImgUrl("upload-img/link.png");
+//$Link->setCity("Auburn");
+//$Link->setAge(1);
+//$Link->setSpecies("cat");
+//$Link->setPhone("2533474268");
+//$Link->setState("WA");
+//$Link->setSex("Male");
+//
+//
+//$dataLayer->addLostPet($Link);
+
 //define default route -> home.html
 $f3->route('GET /', function()
 {
@@ -74,9 +89,12 @@ $f3->route('GET|POST /lostpet', function ($f3){
 
 
 //summary route
-$f3->route('GET /summary', function (){
-$view = new Template();
-echo $view-> render('views/summary.html');
+$f3->route('GET|POST /summary', function ($dataLayer){
+    $GLOBALS['con']->summary($dataLayer);
+});
+//sumbmit route
+$f3->route('GET|POST /submit', function ($dataLayer){
+    $GLOBALS['con']->submit($dataLayer);
 });
 
 $f3->route('GET /adminpage', function ($f3){

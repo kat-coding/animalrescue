@@ -12,7 +12,7 @@ class DataLayer
         try {
             //Instantiate a PDO object
             $this->_dbh = new PDO(DB_DRIVER, USERNAME, PASSWORD);
-            //echo 'Successful!';
+//            echo 'Successful!';
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -72,19 +72,19 @@ class DataLayer
         $state = $lostPet->getState();
         $city = $lostPet->getCity();
         //add to pet table and get id
-        $id = $this->insertIntoPets($name, $age, $sex, $species, $description, $imgurl, $state, $city);
+        $id = DataLayer :: insertIntoPets($name, $age, $sex, $species, $description, $imgurl, $state, $city);
         //lost pet table
         $ownerName = $lostPet->getOwnerName();
         $email = $lostPet->getEmail();
         $phone = $lostPet->getPhone();
         $dateMissing = $lostPet->getDateMissing();
-        $this->insertIntoLostPets($id, $ownerName, $email, $phone, $dateMissing);
+        DataLayer :: insertIntoLostPets($id, $ownerName, $email, $phone, $dateMissing);
     }
 
     function insertIntoPets($name, $age, $sex, $species, $description, $imgUrl, $state, $city){
         //define query
         $sql = "INSERT INTO `pets`(`Name`, `Age`, `Sex`, `Species`, `Description`, `ImgUrl`, `State`, `City`) 
-                VALUES (:name,:age,:sex,:species,:description,:imgUrl,:state,:city)";
+                VALUES (:name,:age,:sex, :species, :description, :imgUrl, :state, :city)";
         //prepare statement
         $statement = $this->_dbh->prepare($sql);
         //bind parameters
@@ -100,7 +100,9 @@ class DataLayer
         $statement->execute();
         //get id
         $id = $this->_dbh->lastInsertId();
+        echo $id;
         return $id;
+
     }
 
     function insertIntoLostPets($id, $ownerName, $email, $phone, $datemissing){

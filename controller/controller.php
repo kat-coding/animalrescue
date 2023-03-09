@@ -80,6 +80,7 @@ class Controller
 
             //set description to object
             $newLostPet->setDescription($description);
+            $newLostPet->setDateMissing($dateMissing);
             //set owners name to object
             if(Validate::validName($fname) & Validate::validName($lname)){
                 $ownerName = $fname." ".$lname;
@@ -177,9 +178,28 @@ class Controller
     }
     function summary()
     {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $view = new Template();
+            echo $view->render('views/summary.html');
+
+        }
+        else {
+            $view = new Template();
+            echo $view->render('views/summary.html');
 //        var_dump($_SESSION);
-        $view = new Template();
-        echo $view-> render('views/summary.html');
+        }
+
+    }
+    function submit()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $GLOBALS['dataLayer']->addLostPet($_SESSION['newLostPet']);
+            echo "added to database";
+            session_destroy();
+//            $this->_f3->reroute('home');
+        }else{
+            echo "not added";
+        }
     }
 
     /**
