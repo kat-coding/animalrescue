@@ -63,23 +63,24 @@ class DataLayer
     }
     function addLostPet($lostPet){
         //pet table
-        $Name = $lostPet->getName();
-        $species = $lostPet->getSpecies();
+        $name = $lostPet->getName();
         $age = $lostPet->getAge();
-        $description = $lostPet->getDescription();
         $sex = $lostPet->getSex();
+        $species = $lostPet->getSpecies();
+        $description = $lostPet->getDescription();
+        $imgurl = $lostPet->getimgUrl();
         $state = $lostPet->getState();
         $city = $lostPet->getCity();
+        //add to pet table and get id
+        $id = $this->insertIntoPets($name, $age, $sex, $species, $description, $imgurl, $state, $city);
         //lost pet table
         $ownerName = $lostPet->getOwnerName();
         $email = $lostPet->getEmail();
         $phone = $lostPet->getPhone();
         $dateMissing = $lostPet->getDateMissing();
-
-
-
-
+        $this->insertIntoLostPets($id, $ownerName, $email, $phone, $dateMissing);
     }
+
     function insertIntoPets($name, $age, $sex, $species, $description, $imgUrl, $state, $city){
         //define query
         $sql = "INSERT INTO `pets`(`Name`, `Age`, `Sex`, `Species`, `Description`, `ImgUrl`, `State`, `City`) 
@@ -100,5 +101,22 @@ class DataLayer
         //get id
         $id = $this->_dbh->lastInsertId();
         return $id;
+    }
+
+    function insertIntoLostPets($id, $ownerName, $email, $phone, $datemissing){
+        //define query
+        $sql = "INSERT INTO `lostPets`(`PetID`, `OwnersName`, `Email`, `Phone`, `Datamissing`) 
+                VALUES (:id,:ownerName,:email,:phone,:datemissing)";
+        //prepare statement
+        $statement = $this->_dbh->prepare($sql);
+        //bind parameters
+        $statement->bindParam(':id', $id);
+        $statement->bindParam(':ownerName', $ownerName);
+        $statement->bindParam(':email', $email);
+        $statement->bindParam(':phone', $phone);
+        $statement->bindParam(':datemissing', $datemissing);
+
+        //execute statement
+        $statement->execute();
     }
 }
