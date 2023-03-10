@@ -61,6 +61,11 @@ class DataLayer
             "SC" => "South Carolina", "SD" => "South Dakota", "TN" => "Tennessee", "TX" => "Texas", "UT" => "Utah",
             "VA" => "Virginia", "WA" => "Washington", "WV" => "West Virginia", "WI" => "Wisconsin", "WY" => "Wyoming");
     }
+
+    /**
+     * @param $lostPet
+     * @return void
+     */
     function addLostPet($lostPet){
         //pet table
         $name = $lostPet->getName();
@@ -80,6 +85,7 @@ class DataLayer
         $dateMissing = $lostPet->getDateMissing();
         DataLayer :: insertIntoLostPets($id, $ownerName, $email, $phone, $dateMissing);
     }
+
 
     function insertIntoPets($name, $age, $sex, $species, $description, $imgUrl, $state, $city){
         //define query
@@ -121,4 +127,43 @@ class DataLayer
         //execute statement
         $statement->execute();
     }
+
+    function addShelterPet($shelterPet){
+        //pet table
+        $name = $shelterPet->getName();
+        $age = $shelterPet->getAge();
+        $sex = $shelterPet->getSex();
+        $species = $shelterPet->getSpecies();
+        $description = $shelterPet->getDescription();
+        $imgurl = $shelterPet->getimgUrl();
+        $state = $shelterPet->getState();
+        $city = $shelterPet->getCity();
+        //add to pet table and get id
+        $id = DataLayer :: insertIntoPets($name, $age, $sex, $species, $description, $imgurl, $state, $city);
+        //lost pet table
+        $status = $shelterPet->getStatus();
+        $goodWithKids = $shelterPet->getGoodWithKids();
+        $goodWithOtherPets = $shelterPet->getGoodWithOtherPets();
+        $healthConditions = $shelterPet->getHealthConditions();
+        DataLayer :: insertIntoShelterPets($id, $status, $goodWithKids, $goodWithOtherPets, $healthConditions);
+    }
+
+    function insertIntoShelterPets($id, $status, $goodWithKids, $goodWithOtherPets, $healthConditions){
+        //define query
+        $sql = "INSERT INTO `lostPets`(`PetID`, `Status`, `GoodWithKids`, `GoodWithOtherPets`, `HealthConditions`) 
+                VALUES (:id,:status,:goodWithKids,:goodWithOtherPets,:healthConditions)";
+        //prepare statement
+        $statement = $this->_dbh->prepare($sql);
+        //bind parameters
+        $statement->bindParam(':id', $id);
+        $statement->bindParam(':status', $status);
+        $statement->bindParam(':goodWithKids', $goodWithKids);
+        $statement->bindParam(':goodWithOtherPets', $goodWithOtherPets);
+        $statement->bindParam(':datemissing', $healthConditions);
+
+        //execute statement
+        $statement->execute();
+    }
+
+
 }

@@ -1,0 +1,58 @@
+
+<!--All of this is actually the lost pet summary until I change it -->
+
+<include href="views/header.html"></include>
+</div>
+</nav>
+<!--Above required for each page for navbar-->
+<h1 class="about-title text-center">Preview Post Before Submitting</h1>
+<br>
+<div class="container border rounded margin-bottom">
+  <!--Summary from form left, picture right-->
+  <div class="row d-flex flex-wrap align-items-center">
+    <div class="col-md-6 ">
+      <h4 class="about-title text-center">Owner's Information</h4>
+      <p class="top-button text">Owner's Name: {{ @_SESSION['newLostPet']->getOwnerName() }}</p>
+      <hr class="summary">
+      <p class="text" >Email: {{ @_SESSION['newLostPet']->getEmail() }}</p>
+      <hr class="summary">
+      <p class="text">City: {{ @_SESSION['newLostPet']->getCity() }}</p>
+      <hr class="summary">
+      <p class="text">State: {{ @_SESSION['newLostPet']->getState() }}</p>
+      <hr class="summary">
+      <p class="text">Phone: {{ @_SESSION['newLostPet']->getPhone() }}</p>
+      <hr class="summary">
+      <h4 class="about-title text-center">Pet's Information</h4>
+      <p class="text">Pet's Name: {{ @_SESSION['newLostPet']->getName() }}</p>
+      <hr class="summary">
+      <p class="text">Species: {{ @_SESSION['newLostPet']->getSpecies() }}</p>
+      <hr class="summary">
+      <p class="text">Description: {{ @_SESSION['newLostPet']->getDescription() }}</p>
+    </div>
+    <div class="col-md-6 img-display">
+      <check if="{{ @_SESSION['newLostPet']->getimgUrl() !== '' }}">
+        <true>
+          <img class="img-fluid img-thumbnail mx-auto d-block" src="{{ @_SESSION['newLostPet']->getimgUrl() }}" alt="user uploaded image">
+
+        </true>
+        <false>
+          <img class="img-fluid img-thumbnail mx-auto d-block" src="images/harryCat.jpg" alt="user uploaded image">
+        </false>
+      </check>
+    </div>
+  </div>
+</div><br>
+<!--submit my post centered-->
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="d-grid gap-2">
+      <form action="summary" method="post">
+        <button type="submit" class="btn btn-primary">Submit My Post!</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+<include href="views/footer.html"></include>
