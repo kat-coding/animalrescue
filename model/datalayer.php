@@ -67,17 +67,9 @@ class DataLayer
      * @return void
      */
     function addLostPet($lostPet){
-        //pet table
-        $name = $lostPet->getName();
-        $age = $lostPet->getAge();
-        $sex = $lostPet->getSex();
-        $species = $lostPet->getSpecies();
-        $description = $lostPet->getDescription();
-        $imgurl = $lostPet->getimgUrl();
-        $state = $lostPet->getState();
-        $city = $lostPet->getCity();
+
         //add to pet table and get id
-        $id = DataLayer :: insertIntoPets($name, $age, $sex, $species, $description, $imgurl, $state, $city);
+        $id = DataLayer :: insertIntoPets($lostPet);
         //lost pet table
         $ownerName = $lostPet->getOwnerName();
         $email = $lostPet->getEmail();
@@ -87,7 +79,16 @@ class DataLayer
     }
 
 
-    function insertIntoPets($name, $age, $sex, $species, $description, $imgUrl, $state, $city){
+    function insertIntoPets($pet){
+        //pet table
+        $name = $pet->getName();
+        $age = $pet->getAge();
+        $sex = $pet->getSex();
+        $species = $pet->getSpecies();
+        $description = $pet->getDescription();
+        $imgUrl = $pet->getimgUrl();
+        $state = $pet->getState();
+        $city = $pet->getCity();
         //define query
         $sql = "INSERT INTO `pets`(`Name`, `Age`, `Sex`, `Species`, `Description`, `ImgUrl`, `State`, `City`) 
                 VALUES (:name,:age,:sex, :species, :description, :imgUrl, :state, :city)";
