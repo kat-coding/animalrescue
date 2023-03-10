@@ -80,13 +80,11 @@ $f3->route('GET /resources', function (){
     $view = new Template();
     echo $view-> render('views/resources.html');
 });
-//
 
-//lostpet form route
+//lost pet form route
 $f3->route('GET|POST /lostpet', function ($f3){
     $GLOBALS['con']->lostpet($f3);
 });
-
 
 //summary lost pet route
 $f3->route('GET|POST /summary', function ($dataLayer){
@@ -97,19 +95,9 @@ $f3->route('GET|POST /submit', function ($dataLayer){
     $GLOBALS['con']->submit($dataLayer);
 });
 
-//route to admin page
-$f3->route('GET /adminpage', function ($f3){
-    $GLOBALS['con']->adminpage();
-});
-
 //admin add new shelter pet route
 $f3->route('GET|POST /shelterPet', function($f3){
     $GLOBALS['con']->shelterPet($f3);
-});
-
-//admin login route--not working yet
-$f3->route('GET|POST /loginroute', function(){
-    $GLOBALS['con']->loginroute();
 });
 
 //summary shelter pet route
@@ -120,5 +108,14 @@ $f3->route('GET|POST /spsummary', function ($dataLayer){
 $f3->route('GET|POST /spsubmit', function ($dataLayer){
     $GLOBALS['con']->spsubmit($dataLayer);
 });
+//route to admin page
+$f3->route('GET /adminpage', function ($f3){
+    $GLOBALS['con']->adminpage();
+});
+//admin login route--not working yet
+$f3->route('GET|POST /loginroute', function(){
+    $GLOBALS['con']->loginroute();
+});
+
 //run instance of fat-free
 $f3->run();

@@ -294,7 +294,6 @@ class Controller
                 $this->_f3->set('errors["sex"]', 'Invalid sex');
             }
 
-
             //if image uploaded run the upload function in controller
             if(!empty($_FILES["file"]["name"])) {
                 $imgURL = Upload::uploadImage($_f3);
@@ -308,7 +307,6 @@ class Controller
                 $newShelterPet->setImgUrl("upload-img/generic.png");
             }
 
-
             if(empty($this->_f3->get('errors'))) {
                 $_SESSION['newShelterPet'] = $newShelterPet;
                 $this->_f3->reroute('shelterPetSummary');
@@ -317,10 +315,10 @@ class Controller
         $this->_f3->set("states", Datalayer::getState());
         $view = new Template();
         echo $view-> render('views/addShelterPet.html');
-    }//end of shetlerpet()
+    }//end of shelterpet()
 
 
-    //summary route for lost pet
+    //summary route for shelter pet
     function spsummary()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {

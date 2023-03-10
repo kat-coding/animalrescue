@@ -131,16 +131,16 @@ class DataLayer
 
     function addShelterPet($shelterPet){
         //pet table
-        $name = $shelterPet->getName();
-        $age = $shelterPet->getAge();
-        $sex = $shelterPet->getSex();
-        $species = $shelterPet->getSpecies();
-        $description = $shelterPet->getDescription();
-        $imgurl = $shelterPet->getimgUrl();
-        $state = $shelterPet->getState();
-        $city = $shelterPet->getCity();
+//        $name = $shelterPet->getName();
+//        $age = $shelterPet->getAge();
+//        $sex = $shelterPet->getSex();
+//        $species = $shelterPet->getSpecies();
+//        $description = $shelterPet->getDescription();
+//        $imgurl = $shelterPet->getimgUrl();
+//        $state = $shelterPet->getState();
+//        $city = $shelterPet->getCity();
         //add to pet table and get id
-        $id = DataLayer :: insertIntoPets($name, $age, $sex, $species, $description, $imgurl, $state, $city);
+        $id = DataLayer :: insertIntoPets($shelterPet);
         //lost pet table
         $status = $shelterPet->getStatus();
         $goodWithKids = $shelterPet->getGoodWithKids();
