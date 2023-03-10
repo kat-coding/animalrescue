@@ -2,8 +2,7 @@
 class Pets
 {
     //required fields
-    private $_name;
-    private $_age;
+    private $_name;  private $_age;
     private $_sex;
     private $_species;
 

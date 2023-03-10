@@ -1,12 +1,9 @@
 <include href="views/header.html"></include>
+<br>
+<h2 class="about-title text-center">Add a new pet to the shelter</h2>
 
-<div class="container-fluid">
-  <div class="text">
-    <form action="#" method="post">
-      <h1>Add a new pet to the shelter</h1>
-
-      <div class="form-group">
-
+<form action="shelterpet" method="post" enctype="multipart/form-data">
+  <div class="container-fluid">
         <div class="row">
           <div class="col-3">
             <label for="name" class="control-label">Pet's Name</label>
@@ -28,8 +25,7 @@
 
         <div class="row">
           <div class="col-2">
-            <label for="microchip" class="control-label">Microchipped?</label>
-            <input type="text" class="form-control" id="microchip" name="microchip">
+
           </div>
           <div class="col-4">
             <label for="city" class="control-label">City</label>
@@ -53,15 +49,21 @@
 
 
 
-        <div class="row">
-          <div class="col-6">
-            <label for="petpic" class="control-label">Picture URL</label>
-            <input type="text" class="form-control" id="petpic" name="petpic">
-          </div>
+    <div class="col-lg-4">
+      <label for="file" class="form-label text">Select Image to Upload:</label>
+      <input class="text" id="file" type="file" name="file">
+
+      <check if="{{ isset( @errors['imageError'])}}">
+        <span class="text-danger">{{ @errors['imageError'] }}</span>
+      </check>
+    </div>
+
+
           <div class="col-3">
             <label for="kids" class="control-label">Good with children?</label>
             <input type="text" class="form-control" id="kids" name="kids">
           </div>
+
           <div class="col-3">
             <label for="goodwpets" class="control-label">Good with other Pets?</label>
             <input type="text" class="form-control" id="goodwpets" name="goodwpets">
@@ -84,10 +86,9 @@
         <div class="row d-flex align-self-end">
           <div class="col-6">
 
-          </div>
-          <div class="col-6">
-            <button class="btn btn-primary w-100" type="submit">Submit</a></button>
-          </div>
+            <div class="d-grid gap-2">
+              <input type="submit" name="submit" value="upload" class="btn btn-primary next-button">Next</input>
+            </div>
 
         </div>
 
