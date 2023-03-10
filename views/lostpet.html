@@ -7,6 +7,7 @@ Lost pet form page with included header and footer
 <br>
 <h2 class="about-title text-center">Post A Lost Pet</h2>
 <p class="text text-center">Post information about your lost pet. Including location and a picture can help reunite you with your pet sooner.</p>
+
 <form action="lostpet" method="post" enctype="multipart/form-data">
     <div class="container-fluid">
         <div class="row">
@@ -51,7 +52,7 @@ Lost pet form page with included header and footer
             </div>
 <!--Owner City-->
             <div class="col-lg-4">
-                <label for="lname" class="form-label text">City:</label><br>
+                <label for="city" class="form-label text">City:</label><br>
                 <input type="text" id="city" name="city" class="form-control" value="{{ @SESSION.city }}">
 
                 <check if="{{ isset( @errors['city'])}}">
@@ -96,7 +97,7 @@ Lost pet form page with included header and footer
             </div>
             <div class="col-lg-4">
                 <!--Pet Age-->
-                <label for="pname" class="form-label text">Age:</label><br>
+                <label for="age" class="form-label text">Age:</label><br>
                 <input type="text" id="age" name="age" class="form-control" value="{{ @SESSION.age }}">
 
                 <check if="{{ isset( @errors['age'])}}">

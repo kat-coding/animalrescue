@@ -92,7 +92,7 @@ $f3->route('GET|POST /lostpet', function ($f3){
 $f3->route('GET|POST /summary', function ($dataLayer){
     $GLOBALS['con']->summary($dataLayer);
 });
-//sumbmit lost pet route
+//submit lost pet route
 $f3->route('GET|POST /submit', function ($dataLayer){
     $GLOBALS['con']->submit($dataLayer);
 });
@@ -110,6 +110,15 @@ $f3->route('GET|POST /shelterPet', function($f3){
 //admin login route--not working yet
 $f3->route('GET|POST /loginroute', function(){
     $GLOBALS['con']->loginroute();
+});
+
+//summary shelter pet route
+$f3->route('GET|POST /spsummary', function ($dataLayer){
+    $GLOBALS['con']->spsummary($dataLayer);
+});
+//submit shelter pet route
+$f3->route('GET|POST /spsubmit', function ($dataLayer){
+    $GLOBALS['con']->spsubmit($dataLayer);
 });
 //run instance of fat-free
 $f3->run();
