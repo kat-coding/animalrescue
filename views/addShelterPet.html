@@ -36,8 +36,13 @@
             <input type="text" class="form-control" id="city" name="city">
           </div>
           <div class="col-2">
-            <label for="state" class="control-label">State</label>
-            <input type="text" class="form-control" id="state" name="state">
+            <label for="state" class="form-label text">State:</label><br>
+            <select class="form-select" name="state" id="state">
+                <option value="" selected="selected">Select a State</option>
+              <repeat group="{{ @states }}" key="{{ @key }}" value="{{ @val }}">
+                <option value="{{ @key }}"> {{ @val }} </option>
+              </repeat>
+            </select>
           </div>
           <div class="col-4">
             <label for="status" class="control-label">Status</label>
