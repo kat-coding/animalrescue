@@ -28,10 +28,10 @@ class Controller
     {
         $availablepets= $GLOBALS['dataLayer']->getavailablepets();
         $this->_f3->set('availablepets', $availablepets);
-        echo "<pre>";
+        /*echo "<pre>";
         var_dump($_POST);
         var_dump($availablepets);
-        echo "</pre>";
+        echo "</pre>";*/
         $view = new Template();
         echo $view-> render('views/adoptable.html');
     }
@@ -42,17 +42,25 @@ class Controller
     }
     function missingpets()
     {
+
         //Get the data from the model
         $lost= $GLOBALS['dataLayer']->getLostPets();
         $this->_f3->set('LostPets', $lost);
-        echo "<pre>";
+        /*echo "<pre>";
         var_dump($_POST);
         var_dump($lost);
-        echo "</pre>";
+        echo "</pre>";*/
         $view = new Template();
         echo $view-> render('views/missing.html');
     }
-
+    function missingPetInfo(){
+        echo "<pre>";
+        var_dump($_GET);
+        var_dump($_POST);
+        echo "</pre>";
+        $view = new Template();
+        echo $view-> render('views/missingPostInfo.html');
+    }
     function resources()
     {
         $view = new Template();
@@ -60,115 +68,53 @@ class Controller
     }
 
 
-    function lostpet($_f3)
+    function lostpet()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $newLostPet = new LostPet();
-
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $email = $_POST['email'];
             $state = $_POST['state'];
             $phone = $_POST['phone'];
-            $pname = $_POST['pname'];
-            $species = $_POST['species'];
-            $age = $_POST['age'];
-            $description = $_POST['description'];
-            $sex = $_POST['sex'];
-            $dateMissing = $_POST['datemissing'];
-            $city = $_POST['city'];
+            $imgURL = "";
+            $statusMsg = "";
 
-            //set description to object
-            $newLostPet->setDescription($description);
-            $newLostPet->setDateMissing($dateMissing);
-            //set owners name to object
-            if(Validate::validName($fname) & Validate::validName($lname)){
-                $ownerName = $fname." ".$lname;
-                $newLostPet->setOwnerName($ownerName);
+            if (validName($fname)){
+                $_SESSION['fname'] = $fname;
+            }else{
+                $this->_f3->set('errors["fname"]', 'First name is invalid');
             }
-            else {
-                if (Validate::validName($fname)) {
-                    $_SESSION['fname'] = $fname;
-                } else {
-                    $this->_f3->set('errors["fname"]', 'First name is invalid');
-                }
 
-                if (Validate::validName($lname)) {
-                    $_SESSION['lname'] = $lname;
-                } else {
-                    $this->_f3->set('errors["lname"]', 'Last name is invalid');
-                }
+            if (validName($lname)){
+                $_SESSION['lname'] = $lname;
+            }else{
+                $this->_f3->set('errors["lname"]', 'Last name is invalid');
             }
-            //set pet name to object
-            if(Validate::validName($pname)){
-                $newLostPet->setName($pname);
-            }else {
-                $this->_f3->set('errors["pname"]', 'Invalid name');
-            }
-            //set email to object
-            if (Validate::validEmail($email)){
-                $newLostPet->setEmail($email);
+
+            if (validEmail($email)){
+                $_SESSION['email'] = $email;
             }else{
                 $this->_f3->set('errors["email"]', 'Email is invalid');
             }
-            //set state to object
-            if (Validate::validState($state)){
-                $newLostPet->setState($state);
+
+            if (validState($state)){
+                $_SESSION['state'] = $state;
             }else{
                 $this->_f3->set('errors["state"]', 'State must be selected');
             }
-            //set city to object
-            if(Validate::validCity($city)){
-                $newLostPet->setCity($city);
-            }else{
-                $this->_f3->set('errors["city"]', 'Invalid city');
-            }
-            //set phone to object
-            if (Validate::validPhone($phone)){
-                $newLostPet->setPhone($phone);
+
+            if (validPhone($phone)){
+                $_SESSION['phone'] = $phone;
             }else{
                 $this->_f3->set('errors["phone"]', 'Phone number is invalid');
             }
-            //set species
-            if(Validate::validSpecies($species)){
-                $newLostPet->setSpecies($species);
-            }else{
-                $this->_f3->set('errors["species"]', 'Species is invalid');
-            }
-            //set age
-            if(Validate::validAge($age)){
-                $newLostPet->setAge($age);
-            }else{
-                $this->_f3->set('errors["age"]', 'Age must be 1-2 digit number');
-            }
-            //set sex to object
-            if(Validate::validSex($sex)){
-                $newLostPet->setSex($sex);
-            }else{
-                $this->_f3->set('errors["sex"]', 'Invalid sex');
-            }
-            //set date missing to object
-            if(Validate::validMissingDate($dateMissing)){
-                $newLostPet->setDateMissing($dateMissing);
-            }else{
-                $this->_f3->set('errors["datemissing"]', 'Invalid date');
-            }
             //if image uploaded run the upload function in controller
             if(!empty($_FILES["file"]["name"])) {
-                $imgURL = Upload::uploadImage($_f3);
-                if(Validate::validIMGURL($imgURL)){
-                    $newLostPet->setImgUrl($imgURL);
-                }else{
-                    $newLostPet->setImgUrl(substr($imgURL, 0, 10));
-                }
-                //ELSE{ errors set in uploadImage() function based on the error}
-            }else{
-                $newLostPet->setImgUrl("upload-img/generic.png");
+                $this->uploadImage();
             }
 
 
             if(empty($this->_f3->get('errors'))) {
-                $_SESSION['newLostPet'] = $newLostPet;
                 $this->_f3->reroute('summary');
             }
         }
@@ -176,204 +122,54 @@ class Controller
         $view = new Template();
         echo $view-> render('views/lostpet.html');
     }
-    //summary route for lost pet
     function summary()
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->_f3->reroute('submit');
-
-        }
-        else {
-            $view = new Template();
-            echo $view->render('views/summary.html');
 //        var_dump($_SESSION);
-        }
-
-    }
-    //submit route for lost pet
-    function submit()
-    {
-        $GLOBALS['dataLayer']->addLostPet($_SESSION['newLostPet']);
-        session_destroy();
-        $this->_f3->reroute('missingpets');
-    }
-
-
-    function adminpage()
-    {
         $view = new Template();
-        echo $view->render('views/admin.html');
+        echo $view-> render('views/summary.html');
     }
 
+    /**
+     * uploadImage function for client image uploads
+     * @return void uploads images to upload-img directory
+     */
+    function uploadImage()
+    {
+        $targetDir = "upload-img/";
+        $fileName = basename($_FILES["file"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+        $_SESSION['file']= $_FILES["file"]["name"];
+        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+            //allow certain file formats
+            $allowTypes = array('jpg','png','jpeg','gif','pdf');
+            if(in_array($fileType, $allowTypes)){
+                //upload file to server
+                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+                    $statusMsg = "The file ".$fileName. " has been uploaded.";
+                    $_SESSION['imgURL'] = $targetFilePath;
 
-    function loginroute()
+                }else{
+                    $statusMsg = "Sorry, there was an error uploading your file.";
+                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
+                }
+            }else{
+                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+                $this->_f3->set('errors["imgUpload"]', $statusMsg);
+            }
+        }else{
+            $statusMsg = 'Please select a file to upload.';
+            $this->_f3->set('errors["imgUpload"]', $statusMsg);
+        }
+    }
+    function loginroute($f3)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            if(checkLogin()){
-                $this->_f3->reroute('adminpage');
-            }
-
+            echo 'You want to go to admin page.';
         }
-       // $this->_f3->set('username', sha1('syntaxians'));
-        //$this->_f3->set('password', sha1('catdog'));
+        $f3->set('username', sha1('syntaxians'));
+        $f3->set('password', sha1('catdog'));
         $view = new Template();
         echo $view->render('views/login.html');
     }
-//unused function?
-    function newShelterPet()
-    {
-        $view = new Template();
-        echo $view->render('views/addShelterPet.html');
-    }
-
-    function confirm()
-    {
-        $view = new Template();
-        echo $view->render('views/addShelterPet.html');
-    }
-
-    function shelterpet($_f3)
-    {
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $newShelterPet = new ShelterPet();
-
-            $name = $_POST['name'];
-            $age = $_POST['age'];
-            $sex = $_POST['sex'];
-            $species = $_POST['species'];
-            $state = $_POST['state'];
-            $city = $_POST['city'];
-            $description = $_POST['description'];
-            $status = $_POST['status'];
-            $goodwpets = $_POST['goodwpets'];
-            $kids = $_POST['kids'];
-            $health = $_POST['health'];
-
-            //set whatever we are not validating
-            $newShelterPet->setDescription($description);
-            $newShelterPet->setStatus($status);
-            $newShelterPet->setGoodWithKids($kids);
-            $newShelterPet->setGoodWithOtherPets($goodwpets);
-            $newShelterPet->setHealthConditions($health);
-            //set pet name to object
-            if(Validate::validName($name)){
-                $newShelterPet->setName($name);
-            }else {
-                $this->_f3->set('errors["name"]', 'Invalid name');
-            }
-
-            //set state to object
-            if (Validate::validState($state)){
-                $newShelterPet->setState($state);
-            }else{
-                $this->_f3->set('errors["state"]', 'State must be selected');
-            }
-            //set city to object
-            if(Validate::validCity($city)){
-                $newShelterPet->setCity($city);
-            }else{
-                $this->_f3->set('errors["city"]', 'Invalid city');
-            }
-            //set species
-            if(Validate::validSpecies($species)){
-                $newShelterPet->setSpecies($species);
-            }else{
-                $this->_f3->set('errors["species"]', 'Species is invalid');
-            }
-            //set age
-            if(Validate::validAge($age)){
-                $newShelterPet->setAge($age);
-            }else{
-                $this->_f3->set('errors["age"]', 'Age must be 1-2 digit number');
-            }
-            //set sex to object
-            if(Validate::validSex($sex)){
-                $newShelterPet->setSex($sex);
-            }else{
-                $this->_f3->set('errors["sex"]', 'Invalid sex');
-            }
-
-            //if image uploaded run the upload function in controller
-            if(!empty($_FILES["file"]["name"])) {
-                $imgURL = Upload::uploadImage($_f3);
-                if(Validate::validIMGURL($imgURL)){
-                    $newShelterPet->setImgUrl($imgURL);
-                }else{
-                    $newShelterPet->setImgUrl(substr($imgURL, 0, 10));
-                }
-                //ELSE{ errors set in uploadImage() function based on the error}
-            }else{
-                $newShelterPet->setImgUrl("upload-img/generic.png");
-            }
-
-            if(empty($this->_f3->get('errors'))) {
-                $_SESSION['newShelterPet'] = $newShelterPet;
-                $this->_f3->reroute('spsummary');
-            }
-        }//end of if POST
-        $this->_f3->set("states", Datalayer::getState());
-        $view = new Template();
-        echo $view-> render('views/addShelterPet.html');
-    }//end of shelterpet()
-
-
-    //summary route for shelter pet
-    function spsummary()
-    {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->_f3->reroute('spsubmit');
-
-        }
-        else {
-            $view = new Template();
-            echo $view->render('views/shelterPetSummary.html');
-//        var_dump($_SESSION);
-        }
-
-    }
-    //submit route for lost pet
-    function spsubmit()
-    {
-        $GLOBALS['dataLayer']->addShelterPet($_SESSION['newShelterPet']);
-        session_destroy();
-        $this->_f3->reroute('shelterpet');
-    }
-
-}//end of function shelterpet
-
-/**
- * uploadImage function for client image uploads
- * @return void uploads images to upload-img directory
- *
- * THIS WAS MOVED TO UPLOAD CLASS
- */
-//    function uploadImage()
-//    {
-//        $targetDir = "upload-img/";
-//        $fileName = basename($_FILES["file"]["name"]);
-//        $targetFilePath = $targetDir . $fileName;
-//        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-//        $_SESSION['file']= $_FILES["file"]["name"];
-//        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
-//            //allow certain file formats
-//            $allowTypes = array('jpg','png','jpeg','gif','pdf');
-//            if(in_array($fileType, $allowTypes)){
-//                //upload file to server
-//                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-//                    $statusMsg = "The file ".$fileName. " has been uploaded.";
-//                    $_SESSION['imgURL'] = $targetFilePath;
-//
-//                }else{
-//                    $statusMsg = "Sorry, there was an error uploading your file.";
-//                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
-//                }
-//            }else{
-//                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-//                $this->_f3->set('errors["imgUpload"]', $statusMsg);
-//            }
-//        }else{
-//            $statusMsg = 'Please select a file to upload.';
-//            $this->_f3->set('errors["imgUpload"]', $statusMsg);
-//        }
-//    }
+}

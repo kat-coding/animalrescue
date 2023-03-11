@@ -69,10 +69,10 @@ $f3->route('GET /missingpets', function ()
 });
 
 //define "Missing Pets info" page route
-$f3->route('GET /missingPostInfo', function ()
+$f3->route('GET /missingPostInfo', function ($f3)
 {
-    $view = new Template();
-    echo $view-> render('views/missingPostInfo.html');
+    $GLOBALS['con']->missingPetInfo($f3);
+
 });
 //define "Resources" page route
 $f3->route('GET /resources', function (){
