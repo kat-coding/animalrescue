@@ -31,16 +31,16 @@
       <hr class="summary">
       <p class="text">City: {{ @_SESSION['newShelterPet']->getGoodWithOtherPets() }}</p>
       <hr class="summary">
-      <p class="text">Description: {{ @_SESSION['newSheltertPet']->getDescription() }}</p>
+      <p class="text">Description: {{ @_SESSION['newShelterPet']->getDescription() }}</p>
       <hr class="summary">
-      <p class="text">Health Conditions: {{ @_SESSION['newSheltertPet']->getHealthConditions() }}</p>
+      <p class="text">Health Conditions: {{ @_SESSION['newShelterPet']->getHealthConditions() }}</p>
       <hr class="summary">
 
     </div>
     <div class="col-md-6 img-display">
       <check if="{{ @_SESSION['newShelterPet']->getimgUrl() !== '' }}">
         <true>
-          <img class="img-fluid img-thumbnail mx-auto d-block" src="{{ @_SESSION['newLostPet']->getimgUrl() }}" alt="user uploaded image">
+          <img class="img-fluid img-thumbnail mx-auto d-block" src="{{ @_SESSION['newShelterPet']->getimgUrl() }}" alt="user uploaded image">
 
         </true>
         <false>
@@ -55,7 +55,7 @@
   <div class="col-md-3"></div>
   <div class="col-md-6">
     <div class="d-grid gap-2">
-      <form action="shelterPetSummary" method="post">
+      <form action="spsummary" method="post">
         <button type="submit" class="btn btn-primary">Submit My Post!</button>
       </form>
     </div>

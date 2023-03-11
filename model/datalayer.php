@@ -107,7 +107,6 @@ class DataLayer
         $statement->execute();
         //get id
         $id = $this->_dbh->lastInsertId();
-        echo $id;
         return $id;
 
     }
@@ -130,15 +129,6 @@ class DataLayer
     }
 
     function addShelterPet($shelterPet){
-        //pet table
-//        $name = $shelterPet->getName();
-//        $age = $shelterPet->getAge();
-//        $sex = $shelterPet->getSex();
-//        $species = $shelterPet->getSpecies();
-//        $description = $shelterPet->getDescription();
-//        $imgurl = $shelterPet->getimgUrl();
-//        $state = $shelterPet->getState();
-//        $city = $shelterPet->getCity();
         //add to pet table and get id
         $id = DataLayer :: insertIntoPets($shelterPet);
         //lost pet table
@@ -151,7 +141,7 @@ class DataLayer
 
     function insertIntoShelterPets($id, $status, $goodWithKids, $goodWithOtherPets, $healthConditions){
         //define query
-        $sql = "INSERT INTO `lostPets`(`PetID`, `Status`, `GoodWithKids`, `GoodWithOtherPets`, `HealthConditions`) 
+        $sql = "INSERT INTO `shelterPet`(`PetID`, `Status`, `GoodWithKids`, `GoodWithOtherPets`, `HealthConditions`) 
                 VALUES (:id,:status,:goodWithKids,:goodWithOtherPets,:healthConditions)";
         //prepare statement
         $statement = $this->_dbh->prepare($sql);
@@ -160,10 +150,12 @@ class DataLayer
         $statement->bindParam(':status', $status);
         $statement->bindParam(':goodWithKids', $goodWithKids);
         $statement->bindParam(':goodWithOtherPets', $goodWithOtherPets);
-        $statement->bindParam(':datemissing', $healthConditions);
+        $statement->bindParam(':healthConditions', $healthConditions);
 
         //execute statement
         $statement->execute();
+        $newID = $this->_dbh->lastInsertId();
+        echo $newID;
     }
 
 
