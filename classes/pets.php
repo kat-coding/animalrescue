@@ -2,7 +2,7 @@
 /**
  * Pets Class
  *
- * 328/animalrescue/pets.php
+ * 328/animalrescue/classes/pets.php
  * Authors: Katherine Watkins, Alex Brenna, Dee Brecke
  * LostPet class is the parent class for all pets in this project. It has
  * fields that are relevant to all pets. Five fields are required but all fields are

@@ -2,7 +2,7 @@
 /**
  * Shelter Pet Class
  *
- * 328/animalrescue/shelterpet.php
+ * 328/animalrescue/classes/shelterpet.php
  * Authors: Katherine Watkins, Alex Brenna, Dee Brecke
  * ShelterPet class is a child class of the Pets parent class. It adds four new
  * fields that are relevant to shelter pets that are not of concern to lost pets

@@ -1,3 +1,36 @@
+/*
+Authors: Katherine Watkins, Alex Brenna, Dee Brecke
+328/animalrescue/styles/styles.css
+This file contains all the styles for the entire project
+ */
+
+.about-title{
+    color: white;
+    margin: 20px;
+}
+body{
+    background-color: black;
+}
+.btn-primary{
+    background-color: #70c27a;
+    border-color: #70c27a;
+    color: black;
+}
+.description{
+    background-color: #70c27a;
+    margin: 20px;
+}
+.img-div{
+    justify-content: center;
+}
+.img-size{
+    min-width: 300px;
+    height: auto;
+}
+.img-thumbnail{
+    width: 200px;
+    height: auto;
+}
 .logo{
     margin-left: 20px;
     margin-right:50px;
@@ -15,39 +48,13 @@
 .navbar-toggler-icon {
     color: black !important;
 }
-.img-div{
-    justify-content: center;
-}
-body{
-    background-color: black;
-}
-.description{
-    background-color: #70c27a;
-    margin: 20px;
-}
-.img-size{
-    min-width: 300px;
-    height: auto;
-}
 .pad-text{
     padding: 15px;
-}
-.about-title{
-    color: white;
-    margin: 20px;
-}
-.text{
-    color: white;
 }
 .summary{
     background-color: white !important;
 }
-.img-thumbnail{
-    width: 200px;
-    height: auto;
+.text{
+    color: white;
 }
-.btn-primary{
-    background-color: #70c27a;
-    border-color: #70c27a;
-    color: black;
-}
+
