@@ -1,18 +1,35 @@
 <?php
+/**
+ * 328/animalrescue/pets.php
+ * Authors: Katherine Watkins, Alex Brenna, Dee Brecke
+ * LostPet class is the parent class for all pets in this project. It has
+ * fields that are relevant to all pets. Five fields are required but all fields are
+ * defaulted to an empty string.
+ * It contains a parameterized constructor with default values and getters and setters
+ * for each field
+ */
 class Pets
 {
     //required fields
-    private $_name;  private $_age;
+    private $_name;
+    private $_age;
     private $_sex;
     private $_species;
-
-    private $_city;
-    //required but defaulted to WA
     private $_state;
 
+    private $_city;
     private $_imgUrl;
     private $_description;
 
+    /**
+     * Parameterized constructor
+     * @param $name string name of animal
+     * @param $age string age of animal
+     * @param $sex string gender of animal
+     * @param $species string species--is it a dog or a cat or other?
+     * @param $state US State in which the animal lives
+     * (we cross-reference our pets with other shelters)
+     */
     function __construct($name = "", $age = "", $sex ="", $species = "", $state="")
     {
         $this->_name = $name;
@@ -25,6 +42,7 @@ class Pets
         $this->_description = "";
     }
 
+    //getters and setters for each field
     function getName()
     {
         return $this->_name;
