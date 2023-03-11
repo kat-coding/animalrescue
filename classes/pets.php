@@ -1,5 +1,7 @@
 <?php
 /**
+ * Pets Class
+ *
  * 328/animalrescue/pets.php
  * Authors: Katherine Watkins, Alex Brenna, Dee Brecke
  * LostPet class is the parent class for all pets in this project. It has

@@ -1,6 +1,8 @@
 <?php
 
 /**
+ * Lost Pet Class
+ *
  * 328/animalrescue/lostpet.php
  * Authors: Katherine Watkins, Alex Brenna, Dee Brecke
  * LostPet class is a child class of the Pets parent class. It adds four new

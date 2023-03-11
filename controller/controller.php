@@ -1,8 +1,15 @@
 <?php
-//controller/controller.php
+/**
+ * Controller class
+ *
+ * 328/animalrescue/controller/controller.php
+ * Authors: Katherine Watkins, Alex Brenna, Dee Brecke
+ * This class contains methods with all the conditional logic for routing
+ * The controller object is passed into the routes on index.php
+ */
 class Controller
 {
-    //first field is fatfree oject/router
+    //first field is fatfree object/router
     private $_f3;
 
     function __construct($f3)
@@ -10,20 +17,33 @@ class Controller
         $this->_f3 = $f3;
     }
 
+ //Routing functions for pages within site
+
     /**
      * @return void
-     * Routing functions for pages within site
+     * default route which renders the home page for the website
      */
     function home()
     {
         $view = new Template();
         echo $view-> render('views/home.html');
     }
+
+    /**
+     * Route which renders the "about" page of the site
+     * @return void
+     */
     function about()
     {
         $view = new Template();
         echo $view-> render('views/about.html');
     }
+
+    /**
+     * This function calls the getavailablepets function from
+     * the datalayer class and renders the adoptable.html page
+     * @return void
+     */
     function availablepets()
     {
         $availablepets= $GLOBALS['dataLayer']->getavailablepets();
@@ -35,14 +55,25 @@ class Controller
         $view = new Template();
         echo $view-> render('views/adoptable.html');
     }
+
+    /**
+     * TODO: Write this page or remove this route
+     * Route which renders the found pets page
+     * @return void
+     */
     function foundpets()
     {
         $view = new Template();
         echo $view-> render('views/found.html');
     }
+
+    /**
+     * This method calls the getLostPets function in
+     * the datalayer class and renders the missing pets page
+     * @return void
+     */
     function missingpets()
     {
-
         //Get the data from the model
         $lost= $GLOBALS['dataLayer']->getLostPets();
         $this->_f3->set('LostPets', $lost);
@@ -53,6 +84,12 @@ class Controller
         $view = new Template();
         echo $view-> render('views/missing.html');
     }
+
+    /**
+     * Route renders the missingPostInfo page
+     * TODO: check if this is a redundant route (info appears to be already coded into missing.html)
+     * @return void
+     */
     function missingPetInfo(){
         echo "<pre>";
         var_dump($_GET);
@@ -61,13 +98,25 @@ class Controller
         $view = new Template();
         echo $view-> render('views/missingPostInfo.html');
     }
+
+    /**
+     * Route that renders the resources page that we haven't built yet
+     * TODO: remove this route or create resources page
+     * @return void
+     */
     function resources()
     {
         $view = new Template();
         echo $view-> render('views/resources.html');
     }
 
-
+    /**
+     * This function renders the page where the user can enter
+     * their lost pet info. It validates all of the information that
+     * is provided and displays the States drop down menu. If all data
+     * is validated, it reroutes to the summary page
+     * @return void
+     */
     function lostpet()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -113,7 +162,6 @@ class Controller
                 $this->uploadImage();
             }
 
-
             if(empty($this->_f3->get('errors'))) {
                 $this->_f3->reroute('summary');
             }
@@ -122,6 +170,13 @@ class Controller
         $view = new Template();
         echo $view-> render('views/lostpet.html');
     }
+
+    /**
+     * This is the summary page for the lost pets form
+     * It renders summary.html which offers the user the opportunity
+     * to check the information they added and submit it.
+     * @return void
+     */
     function summary()
     {
 //        var_dump($_SESSION);
@@ -162,6 +217,15 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
+
+    /**
+     * TODO: Finish writing this and get it to work
+     * This is the route to the admin login page. The user enters
+     * their login and password and if valid, they are rerouted
+     * to the admin page
+     * @param $f3
+     * @return void
+     */
     function loginroute($f3)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
