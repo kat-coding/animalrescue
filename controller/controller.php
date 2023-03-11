@@ -336,8 +336,8 @@ class Controller
     function spsubmit()
     {
         $GLOBALS['dataLayer']->addShelterPet($_SESSION['newShelterPet']);
-//        session_destroy();
-//        $this->_f3->reroute('shelterpet');
+        session_destroy();
+        $this->_f3->reroute('shelterpet');
     }
 
 }//end of function shelterpet
