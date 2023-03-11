@@ -179,15 +179,143 @@ class Controller
      */
     function summary()
     {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->_f3->reroute('submit');
+
+        } else {
+            $view = new Template();
+            echo $view->render('views/summary.html');
 //        var_dump($_SESSION);
-        $view = new Template();
-        echo $view-> render('views/summary.html');
+        }
     }
 
-    /**
+    //submit route for lost pet
+    function submit()
+    {
+        $GLOBALS['dataLayer']->addLostPet($_SESSION['newLostPet']);
+        session_destroy();
+        $this->_f3->reroute('missingpets');
+    }
+
+
+
+
+    function shelterpet($_f3)
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $newShelterPet = new ShelterPet();
+
+            $name = $_POST['name'];
+            $age = $_POST['age'];
+            $sex = $_POST['sex'];
+            $species = $_POST['species'];
+            $state = $_POST['state'];
+            $city = $_POST['city'];
+            $description = $_POST['description'];
+            $status = $_POST['status'];
+            $goodwpets = $_POST['goodwpets'];
+            $kids = $_POST['kids'];
+            $health = $_POST['health'];
+
+            //set whatever we are not validating
+            $newShelterPet->setDescription($description);
+            $newShelterPet->setStatus($status);
+            $newShelterPet->setGoodWithKids($kids);
+            $newShelterPet->setGoodWithOtherPets($goodwpets);
+            $newShelterPet->setHealthConditions($health);
+            //set pet name to object
+            if(Validate::validName($name)){
+                $newShelterPet->setName($name);
+            }else {
+                $this->_f3->set('errors["name"]', 'Invalid name');
+            }
+
+            //set state to object
+            if (Validate::validState($state)){
+                $newShelterPet->setState($state);
+            }else{
+                $this->_f3->set('errors["state"]', 'State must be selected');
+            }
+            //set city to object
+            if(Validate::validCity($city)){
+                $newShelterPet->setCity($city);
+            }else{
+                $this->_f3->set('errors["city"]', 'Invalid city');
+            }
+            //set species
+            if(Validate::validSpecies($species)){
+                $newShelterPet->setSpecies($species);
+            }else{
+                $this->_f3->set('errors["species"]', 'Species is invalid');
+            }
+            //set age
+            if(Validate::validAge($age)){
+                $newShelterPet->setAge($age);
+            }else{
+                $this->_f3->set('errors["age"]', 'Age must be 1-2 digit number');
+            }
+            //set sex to object
+            if(Validate::validSex($sex)){
+                $newShelterPet->setSex($sex);
+            }else{
+                $this->_f3->set('errors["sex"]', 'Invalid sex');
+            }
+
+            //if image uploaded run the upload function in controller
+            if(!empty($_FILES["file"]["name"])) {
+                $imgURL = Upload::uploadImage($_f3);
+                if(Validate::validIMGURL($imgURL)){
+                    $newShelterPet->setImgUrl($imgURL);
+                }else{
+                    $newShelterPet->setImgUrl(substr($imgURL, 0, 10));
+                }
+                //ELSE{ errors set in uploadImage() function based on the error}
+            }else{
+                $newShelterPet->setImgUrl("upload-img/generic.png");
+            }
+
+            if(empty($this->_f3->get('errors'))) {
+                $_SESSION['newShelterPet'] = $newShelterPet;
+                $this->_f3->reroute('spsummary');
+            }
+        }//end of if POST
+        $this->_f3->set("states", Datalayer::getState());
+        $view = new Template();
+        echo $view-> render('views/addShelterPet.html');
+    }//end of shelterpet()
+
+    //summary route for shelter pet
+    function spsummary()
+    {
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->_f3->reroute('spsubmit');
+
+        }
+        else {
+            $view = new Template();
+            echo $view->render('views/shelterPetSummary.html');
+//        var_dump($_SESSION);
+        }
+
+        //submit route for lost pet
+        function spsubmit()
+        {
+            $GLOBALS['dataLayer']->addShelterPet($_SESSION['newShelterPet']);
+            session_destroy();
+            $this->_f3->reroute('shelterpet');
+        }
+
+
+        function confirm()
+    {
+        $view = new Template();
+        echo $view->render('views/addShelterPet.html');
+    }
+/*
+    /** This was moved to class
      * uploadImage function for client image uploads
      * @return void uploads images to upload-img directory
-     */
+
     function uploadImage()
     {
         $targetDir = "upload-img/";
@@ -217,6 +345,12 @@ class Controller
             $this->_f3->set('errors["imgUpload"]', $statusMsg);
         }
     }
+     */
+    function adminpage()
+    {
+        $view = new Template();
+        echo $view->render('views/admin.html');
+    }
 
     /**
      * TODO: Finish writing this and get it to work
@@ -236,4 +370,6 @@ class Controller
         $view = new Template();
         echo $view->render('views/login.html');
     }
+
+
 }
