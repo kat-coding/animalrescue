@@ -287,24 +287,22 @@ class Controller
     //summary route for shelter pet
     function spsummary()
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->_f3->reroute('spsubmit');
 
-        }
-        else {
+        } else {
             $view = new Template();
             echo $view->render('views/shelterPetSummary.html');
 //        var_dump($_SESSION);
         }
-
-        //submit route for lost pet
-        function spsubmit()
-        {
-            $GLOBALS['dataLayer']->addShelterPet($_SESSION['newShelterPet']);
-            session_destroy();
-            $this->_f3->reroute('shelterpet');
-        }
-
+    }
+    //submit route for lost pet
+    function spsubmit()
+    {
+        $GLOBALS['dataLayer']->addShelterPet($_SESSION['newShelterPet']);
+        session_destroy();
+        $this->_f3->reroute('shelterpet');
+    }
 
         function confirm()
     {
