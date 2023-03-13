@@ -27,10 +27,9 @@ and missing pets so others can help find them
             <th>{{ @LostPets['Species'] }}</th>
             <th>{{ @LostPets['City'] }}, {{ @LostPets['State'] }}</th>
             <th>{{ @LostPets['Description']}}</th>
-            <th><a href="missingPostInfo"><button name="PetID" id="PetID" value="{{ @LostPets['Description']}}">More info</button></a></th><!--PetID-->
+            <th><a href="missingPostInfo?id={{ @LostPets['PetID']}}"><button >More info</button></a></th><!--PetID-->
         </tr>
     </repeat>
-
     </tbody>
 </table>
 
