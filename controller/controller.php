@@ -127,52 +127,115 @@ class Controller
      * is validated, it reroutes to the summary page
      * @return void
      */
-    function lostpet()
+    function lostpet($_f3)
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $newLostPet = new LostPet();
+
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $email = $_POST['email'];
             $state = $_POST['state'];
             $phone = $_POST['phone'];
-            $imgURL = "";
-            $statusMsg = "";
+            $pname = $_POST['pname'];
+            $species = $_POST['species'];
+            $age = $_POST['age'];
+            $description = $_POST['description'];
+            $sex = $_POST['sex'];
+            $dateMissing = $_POST['datemissing'];
+            $city = $_POST['city'];
 
-            if (validName($fname)){
-                $_SESSION['fname'] = $fname;
-            }else{
-                $this->_f3->set('errors["fname"]', 'First name is invalid');
+            //set description to object
+            $newLostPet->setDescription($description);
+            $newLostPet->setDateMissing($dateMissing);
+            //set owners name to object
+            if(Validate::validName($fname) & Validate::validName($lname)){
+                $ownerName = $fname." ".$lname;
+                $newLostPet->setOwnerName($ownerName);
             }
+            else {
+                if (Validate::validName($fname)) {
+                    $_SESSION['fname'] = $fname;
+                } else {
+                    $this->_f3->set('errors["fname"]', 'First name is invalid');
+                }
 
-            if (validName($lname)){
-                $_SESSION['lname'] = $lname;
-            }else{
-                $this->_f3->set('errors["lname"]', 'Last name is invalid');
+                if (Validate::validName($lname)) {
+                    $_SESSION['lname'] = $lname;
+                } else {
+                    $this->_f3->set('errors["lname"]', 'Last name is invalid');
+                }
             }
-
-            if (validEmail($email)){
-                $_SESSION['email'] = $email;
+            //set pet name to object
+            if(Validate::validName($pname)){
+                $newLostPet->setName($pname);
+            }else {
+                $this->_f3->set('errors["pname"]', 'Invalid name');
+            }
+            //set email to object
+            if (Validate::validEmail($email)){
+                $newLostPet->setEmail($email);
             }else{
                 $this->_f3->set('errors["email"]', 'Email is invalid');
             }
-
-            if (validState($state)){
-                $_SESSION['state'] = $state;
+            //set state to object
+            if (Validate::validState($state)){
+                $newLostPet->setState($state);
             }else{
                 $this->_f3->set('errors["state"]', 'State must be selected');
             }
-
-            if (validPhone($phone)){
-                $_SESSION['phone'] = $phone;
+            //set city to object
+            if(Validate::validCity($city)){
+                $newLostPet->setCity($city);
+            }else{
+                $this->_f3->set('errors["city"]', 'Invalid city');
+            }
+            //set phone to object
+            if (Validate::validPhone($phone)){
+                $newLostPet->setPhone($phone);
             }else{
                 $this->_f3->set('errors["phone"]', 'Phone number is invalid');
             }
+            //set species
+            if(Validate::validSpecies($species)){
+                $newLostPet->setSpecies($species);
+            }else{
+                $this->_f3->set('errors["species"]', 'Species is invalid');
+            }
+            //set age
+            if(Validate::validAge($age)){
+                $newLostPet->setAge($age);
+            }else{
+                $this->_f3->set('errors["age"]', 'Age must be 1-2 digit number');
+            }
+            //set sex to object
+            if(Validate::validSex($sex)){
+                $newLostPet->setSex($sex);
+            }else{
+                $this->_f3->set('errors["sex"]', 'Invalid sex');
+            }
+            //set date missing to object
+            if(Validate::validMissingDate($dateMissing)){
+                $newLostPet->setDateMissing($dateMissing);
+            }else{
+                $this->_f3->set('errors["datemissing"]', 'Invalid date');
+            }
             //if image uploaded run the upload function in controller
             if(!empty($_FILES["file"]["name"])) {
-                $this->uploadImage();
+                $imgURL = Upload::uploadImage($_f3);
+                if(Validate::validIMGURL($imgURL)){
+                    $newLostPet->setImgUrl($imgURL);
+                }else{
+                    $newLostPet->setImgUrl(substr($imgURL, 0, 10));
+                }
+                //ELSE{ errors set in uploadImage() function based on the error}
+            }else{
+                $newLostPet->setImgUrl("upload-img/generic.png");
             }
 
+
             if(empty($this->_f3->get('errors'))) {
+                $_SESSION['newLostPet'] = $newLostPet;
                 $this->_f3->reroute('summary');
             }
         }

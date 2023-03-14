@@ -8,23 +8,14 @@
     <!--Summary from form left, picture right-->
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-6 ">
-            <h4 class="about-title text-center">Owner's Information</h4>
-
-            <p class="top-button text">Owner's Name: {{ @_SESSION['newLostPet']->getOwnerName() }}</p>
-            <hr class="summary">
-
-            <p class="text" >Email: {{ @_SESSION['newLostPet']->getEmail() }}</p>
-            <hr class="summary">
-            <p class="text">City: {{ @_SESSION['newLostPet']->getCity() }}</p>
-            <hr class="summary">
-            <p class="text">State: {{ @_SESSION['newLostPet']->getState() }}</p>
-            <hr class="summary">
-            <p class="text">Phone: {{ @_SESSION['newLostPet']->getPhone() }}</p>
-            <hr class="summary">
             <h4 class="about-title text-center">Pet's Information</h4>
             <p class="text">Pet's Name: {{ @_SESSION['newLostPet']->getName() }}</p>
             <hr class="summary">
             <p class="text">Species: {{ @_SESSION['newLostPet']->getSpecies() }}</p>
+            <hr class="summary">
+            <p class="text">City: {{ @_SESSION['newLostPet']->getCity() }}</p>
+            <hr class="summary">
+            <p class="text">State: {{ @_SESSION['newLostPet']->getState() }}</p>
             <hr class="summary">
             <p class="text">Description: {{ @_SESSION['newLostPet']->getDescription() }}</p>
         </div>
@@ -39,6 +30,23 @@
                 </false>
             </check>
         </div>
+    </div>
+    <h4>Information below will not be shown on public post</h4>
+    <div class="row d-flex flex-wrap align-items-center">
+        <div class="col-md-6">
+            <h4 class="about-title text-center">Owner's Information</h4>
+
+            <p class="top-button text">Owner's Name: {{ @_SESSION['newLostPet']->getOwnerName() }}</p>
+            <hr class="summary">
+
+            <p class="text" >Email: {{ @_SESSION['newLostPet']->getEmail() }}</p>
+            <hr class="summary">
+            <p class="text">Phone: {{ @_SESSION['newLostPet']->getPhone() }}</p>
+            <hr class="summary">
+        </div>
+        <div class="col-md-6">
+        </div>
+
     </div>
 </div><br>
 <!--submit my post centered-->
