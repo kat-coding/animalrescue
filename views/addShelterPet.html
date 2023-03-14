@@ -2,7 +2,7 @@
 <br>
 <h2 class="about-title text-center">Add a new pet to the shelter</h2>
 
-<form action="shelterpet" method="post" enctype="multipart/form-data">
+<form id="shelterform" action="shelterpet" method="post" enctype="multipart/form-data">
   <div class="container-fluid">
       <!--first row of form -->
         <div class="row">
@@ -10,6 +10,7 @@
           <div class="col-lg-3">
             <label for="name" class="form-label text">Pet's Name</label>
             <input type="text" id="name" name="name" class="form-control" value="{{ @SESSION.name }}">
+              <span class="err" id="err-name">Name is Required</span>
           </div>
             <check if="{{ isset( @errors['name'])}}">
                 <span class="text-danger">{{ @errors['name'] }}</span>
@@ -18,6 +19,7 @@
             <div class="col-lg-3">
                 <label for="age" class="form-label text">Age of Pet</label>
                 <input type="text" id="age" name="age" class="form-control" value="{{ @SESSION.age }}">
+                <span class="err" id="err-age">Age is Required</span>
                 <check if="{{ isset( @errors['age'])}}">
                     <span class="text-danger">{{ @errors['age'] }}</span>
                 </check>
@@ -26,6 +28,7 @@
             <div class="col-lg-3">
                 <label for="species" class="form-label text">Pet Species</label>
                 <input type="text" id="species" name="species" class="form-control" value="{{ @SESSION.species }}">
+                <span class="err" id="err-species">Please indicate if cat or dog</span>
                 <check if="{{ isset( @errors['species'])}}">
                     <span class="text-danger">{{ @errors['species'] }}</span>
                 </check>
@@ -34,6 +37,7 @@
             <div class="col-lg-3">
                 <label for="sex" class="form-label text">Sex of Pet</label>
                 <input type="text" id="sex" name="sex" class="form-control" value="{{ @SESSION.sex }}">
+                <span class="err" id="err-sex">Sex is Required</span>
                 <check if="{{ isset( @errors['sex'])}}">
                     <span class="text-danger">{{ @errors['sex'] }}</span>
                 </check>
@@ -46,6 +50,7 @@
           <div class="col-lg-3">
                 <label for="city" class="form-label text">City</label>
                 <input type="text" id="city" name="city" class="form-control" value="{{ @SESSION.city }}">
+                <span class="err" id="err-city">City is Required</span>
                  <check if="{{ isset( @errors['city'])}}">
                     <span class="text-danger">{{ @errors['city'] }}</span>
                 </check>
@@ -68,6 +73,7 @@
             <div class="col-lg-3">
                 <label for="status" class="form-label text">Status</label>
                 <input type="text" id="status" name="status" class="form-control" value="{{ @SESSION.status }}">
+                <span class="err" id="err-status">Status is Required</span>
             </div>
             <!--image -->
             <div class="col-lg-3">
@@ -87,6 +93,7 @@
                   <div class="col-lg-12">
                       <label for="kids" class="form-label text">Good with children?</label>
                       <input type="text" id="kids" name="kids" class="form-control" value="{{ @SESSION.kids }}">
+                      <span class="err" id="err-kids">Please answer: "unknown" if not known</span>
                   </div>
               </div>
 
@@ -94,6 +101,7 @@
                  <div class="col-lg-12">
                     <label for="goodwpets" class="form-label text">Good with other Pets?</label>
                     <input type="text" id="goodwpets" name="goodwpets" class="form-control" value="{{ @SESSION.goodwpets }}">
+                     <span class="err" id="err-pets">Please answer: "unknown" if not known</span>
                  </div>
              </div>
           </div>
@@ -101,6 +109,7 @@
           <div class="col-lg-6">
               <label for="health" class="form-label text">Health Concerns</label>
               <textarea id="health" name="health" class="form-control h-100" ></textarea>
+              <span class="err" id="err-health">Please answer: "unknown" if not known</span>
           </div>
       </div>
       <br>
@@ -130,12 +139,63 @@
 
 </form>
 
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="javascript/validate.js"></script>
+<script>
+    //when form is submitted using jquery
+    $("#shelterform").on("submit", function (){
+        let name = $("#name").val()
+        if(name == ""){
+            $("#err-name").css("display", "block")
+            return false;
+        }
+        let age = $("#age").val()
+        if(age == ""){
+            $("#err-age").css("display", "block")
+            return false;
+        }
+        let species = $("#species").val()
+        if(species == ""){
+            $("#err-species").css("display", "block")
+            return false;
+        }
+        let sex = $("#sex").val()
+        if(sex == ""){
+            $("#err-sex").css("display", "block")
+            return false;
+        }
+        let city = $("#city").val()
+        if(city == ""){
+            $("#err-city").css("display", "block")
+            return false;
+        }
+        let state = $("#state").val()
+        if(state == ""){
+            $("#err-state").css("display", "block")
+            return false;
+        }
+        let status = $("#status").val()
+        if(status == ""){
+            $("#err-status").css("display", "block")
+            return false;
+        }
+        let kids = $("#kids").val()
+        if(kids == ""){
+            $("#err-kids").css("display", "block")
+            return false;
+        }
+        let pets = $("#pets").val()
+        if(pets == ""){
+            $("#err-pets").css("display", "block")
+            return false;
+        }
+        let health = $("#health").val()
+        if(health == ""){
+            $("#err-health").css("display", "block")
+            return false;
+        }
 
-
-
-<!--
-
- -->
-
+    })
+</script>
 
 <include href="views/footer.html"></include>
