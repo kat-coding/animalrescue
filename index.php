@@ -17,20 +17,6 @@ $f3 = Base::instance();
 //Instantiate a controller object
 $con = new Controller($f3);
 $dataLayer = new DataLayer();
-//$Link = new LostPet();
-//$Link->setOwnerName("Katherine Watkins");
-//$Link->setName("Link");
-//$Link->setDescription("My cat.");
-//$Link->setImgUrl("upload-img/link.png");
-//$Link->setCity("Auburn");
-//$Link->setAge(1);
-//$Link->setSpecies("cat");
-//$Link->setPhone("2533474268");
-//$Link->setState("WA");
-//$Link->setSex("Male");
-//
-//
-//$dataLayer->addLostPet($Link);
 
 //define default route -> home.html
 $f3->route('GET /', function()
