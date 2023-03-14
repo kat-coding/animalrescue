@@ -20,6 +20,8 @@ class Controller
  //Routing functions for pages within site
 
     /**
+     * Home page route
+     *
      * @return void
      * default route which renders the home page for the website
      */
@@ -30,6 +32,8 @@ class Controller
     }
 
     /**
+     * About page route
+     *
      * Route which renders the "about" page of the site
      * @return void
      */
@@ -40,6 +44,8 @@ class Controller
     }
 
     /**
+     * Adoptable pets page route
+     *
      * This function calls the getavailablepets function from
      * the datalayer class and renders the adoptable.html page
      * @return void
@@ -68,6 +74,8 @@ class Controller
     }
 
     /**
+     * Missing Pets page route
+     *
      * This method calls the getLostPets function in
      * the datalayer class and renders the missing pets page
      * @return void
@@ -111,8 +119,10 @@ class Controller
     }
 
     /**
+     * Lost Pet Form Route
+     *
      * This function renders the page where the user can enter
-     * their lost pet info. It validates all of the information that
+     * their lost pet info. It validates all the information that
      * is provided and displays the States drop down menu. If all data
      * is validated, it reroutes to the summary page
      * @return void
@@ -172,6 +182,8 @@ class Controller
     }
 
     /**
+     * Lost Pet Summary Page Route
+     *
      * This is the summary page for the lost pets form
      * It renders summary.html which offers the user the opportunity
      * to check the information they added and submit it.
@@ -189,7 +201,14 @@ class Controller
         }
     }
 
-    //submit route for lost pet
+    /**
+     * Missing Pets submission route
+     *
+     * This function calls the addLostPet function on the current session,
+     * ends the session and then reroutes the user back to the missing pets
+     * page (that should show the newly added pet)
+     * @return void
+     */
     function submit()
     {
         $GLOBALS['dataLayer']->addLostPet($_SESSION['newLostPet']);
@@ -198,9 +217,15 @@ class Controller
     }
 
 
-
-
-    function shelterpet($_f3)
+    /**
+     * Add Shelter Pet form route
+     *
+     * This method renders the form for the admin to add a new pet
+     * to the pets and shelter pets tables in the database. It validates
+     * the info and reroutes to the shelter pet summary page
+     * @return void
+     */
+    function shelterpet()
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $newShelterPet = new ShelterPet();
@@ -263,7 +288,7 @@ class Controller
 
             //if image uploaded run the upload function in controller
             if(!empty($_FILES["file"]["name"])) {
-                $imgURL = Upload::uploadImage($_f3);
+                $imgURL = Upload::uploadImage($this->_f3);
                 if(Validate::validIMGURL($imgURL)){
                     $newShelterPet->setImgUrl($imgURL);
                 }else{
@@ -284,7 +309,15 @@ class Controller
         echo $view-> render('views/addShelterPet.html');
     }//end of shelterpet()
 
-    //summary route for shelter pet
+
+    /**
+     * summary route for shelter pet
+     *
+     * This method displays the information that was entered into
+     * the add shelter pet form and reroutes to the submit
+     * page when the user (admin) hits the submit button
+     * @return void
+     */
     function spsummary()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -296,14 +329,26 @@ class Controller
 //        var_dump($_SESSION);
         }
     }
-    //submit route for lost pet
+    /**
+     * submit route for shelter pet
+     *
+     * This function calls the addShelterPet function on the current session,
+     * ends the session and then reroutes the user back to the admin page
+     *
+     * @return void
+     */
     function spsubmit()
     {
         $GLOBALS['dataLayer']->addShelterPet($_SESSION['newShelterPet']);
         session_destroy();
-        $this->_f3->reroute('shelterpet');
+        $this->_f3->reroute('adminpage');
     }
 
+    /**
+     * I believe this is a redundant route
+     * TODO: delete this route if it is redundant
+     * @return void
+     */
         function confirm()
     {
         $view = new Template();
@@ -355,16 +400,15 @@ class Controller
      * This is the route to the admin login page. The user enters
      * their login and password and if valid, they are rerouted
      * to the admin page
-     * @param $f3
      * @return void
      */
-    function loginroute($f3)
+    function loginroute()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo 'You want to go to admin page.';
         }
-        $f3->set('username', sha1('syntaxians'));
-        $f3->set('password', sha1('catdog'));
+        //$f3->set('username', sha1('syntaxians'));
+        //$f3->set('password', sha1('catdog'));
         $view = new Template();
         echo $view->render('views/login.html');
     }
