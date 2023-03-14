@@ -20,6 +20,10 @@ body{
     background-color: #70c27a;
     margin: 20px;
 }
+.err{
+    color: red;
+    display: none;
+}
 .img-div{
     justify-content: center;
 }

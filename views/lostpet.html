@@ -90,7 +90,7 @@ Lost pet form page with included header and footer
             <div class="col-lg-4">
                 <label for="species" class="form-label text">Species:</label><br>
                 <input type="text" id="species" name="species" class="form-control" value="{{ @SESSION.species }}">
-
+                <span class="err" id="err-name">Please indicate cat, dog, or other</span>
                 <check if="{{ isset( @errors['species'])}}">
                     <span class="text-danger">{{ @errors['species'] }}</span>
                 </check>
