@@ -404,7 +404,9 @@ class Controller
     }
 
     /**
-     * This is the route to the admin login page. The user enters
+     * Admin login route
+     *
+     * This is the first stop on the way to the admin page. The user enters
      * their login and password and if valid, they are rerouted
      * to the admin page
      * @return void
@@ -419,17 +421,8 @@ class Controller
                 $this->_f3->reroute('adminpage');
             }
         }
-        //$f3->set('username', sha1('syntaxians'));
-        //$f3->set('password', sha1('catdog'));
         $view = new Template();
         echo $view->render('views/login.html');
     }
-
-    function showAllPets()
-    {
-        $view = new Template();
-        echo $view->render('views/allPets.html');
-    }
-
 
 }

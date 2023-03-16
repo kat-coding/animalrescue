@@ -1,9 +1,21 @@
+/**
+ * Authors Dee Brecke, Katherine Watkins, Alex Brenna
+ * 3/14/23
+ * This is the client-side validation for the shelter pet form
+ * It shows error message if the data is missing, but keeps the
+ * entered data on the page
+ */
 $("#shelterform").on("submit", function (){
+    //put value of name field in variable
     let name = $("#name").val()
+    //check if the name is missing
     if(name == ""){
+        //if so, show the error message on the page
         $("#err-name").css("display", "block")
+        //and don't submit the form
         return false;
     }
+    //continue check as above for all other required fields
     let age = $("#age").val()
     if(age == ""){
         $("#err-age").css("display", "block")
@@ -49,5 +61,4 @@ $("#shelterform").on("submit", function (){
         $("#err-health").css("display", "block")
         return false;
     }
-
 })

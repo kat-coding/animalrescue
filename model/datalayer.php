@@ -2,22 +2,40 @@
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/../pdo-config.php');
 
+/**
+ * Authors: Dee Brecke, Alex Brenna, Katherine Watkins
+ * This class contains methods and functions to interact with the database
+ * and to add dropdown items to the pages
+ */
 class DataLayer
 {
     // Database connection object
     private $_dbh;
 
+    /**
+     * Constructor
+     *
+     * This is the constructor function for the database object (PDO)
+     */
     function __construct()
     {
         try {
             //Instantiate a PDO object
             $this->_dbh = new PDO(DB_DRIVER, USERNAME, PASSWORD);
-//            echo 'Successful!';
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-    function getavailablepets(){
+
+    /**
+     * Available pets function
+     *
+     * This function interacts with the database to populate the adoptable
+     * pets table in adoptable.html
+     * @return array|false
+     */
+    function getavailablepets()
+    {
         //1. Define the query
         $sql = "SELECT * FROM pets, shelterPet where shelterPet.PetID=pets.PetID";
 
@@ -32,6 +50,14 @@ class DataLayer
         //5. Process the results
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Lost pets function
+     *
+     * This function interacts with the database to populate the lost
+     * pets table in missing.html
+     * @return array|false
+     */
     function getLostPets()
     {
         //1. Define the query
@@ -48,6 +74,13 @@ class DataLayer
         //5. Process the results
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * This pulls up a specific pet based on the pet id (when "more info" is clicked
+     * on missing pets page)
+     * @param $id pet ID for specific pet that was clicked on
+     * @return array|false data from database associated with a particular pet ID
+     */
     function getLostPet($id)
     {
         //1. Define the query
@@ -65,6 +98,9 @@ class DataLayer
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @return string[] array of US States to go in drop-down menus
+     */
     static function  getState()
     {
         return array("AL" => "Alabama", "AK" => "Alaska", "AZ" => "Arizona", "AR" => "Arkansas", "CA" => "California",
@@ -80,23 +116,18 @@ class DataLayer
     }
 
     /**
-     * @param $lostPet
-     * @return void
+     * Function for adding pets to database
+     *
+     * This function takes in a pet object and inserts the fields of the
+     * pet parent class into the database. This is a necessary first step to
+     * be able to insert a shelter pet or lost pet because the pet ID is auto-generated
+     * in the database. It returns a unique pet id which can be passed into the
+     * other functions to add to the other tables in the database
+     * @param $pet pet object containing required fields for all pets
+     * @return $id unique id for pet
      */
-    function addLostPet($lostPet){
-
-        //add to pet table and get id
-        $id = DataLayer :: insertIntoPets($lostPet);
-        //lost pet table
-        $ownerName = $lostPet->getOwnerName();
-        $email = $lostPet->getEmail();
-        $phone = $lostPet->getPhone();
-        $dateMissing = $lostPet->getDateMissing();
-        DataLayer :: insertIntoLostPets($id, $ownerName, $email, $phone, $dateMissing);
-    }
-
-
-    function insertIntoPets($pet){
+    function insertIntoPets($pet)
+    {
         //pet table
         $name = $pet->getName();
         $age = $pet->getAge();
@@ -125,8 +156,16 @@ class DataLayer
         //get id
         $id = $this->_dbh->lastInsertId();
         return $id;
-
     }
+
+    /**
+     * @param $id
+     * @param $ownerName
+     * @param $email
+     * @param $phone
+     * @param $datemissing
+     * @return void
+     */
 
     function insertIntoLostPets($id, $ownerName, $email, $phone, $datemissing){
         //define query
@@ -145,6 +184,26 @@ class DataLayer
         $statement->execute();
     }
 
+    /**
+     * @param $lostPet
+     * @return void
+     */
+    function addLostPet($lostPet){
+
+        //add to pet table and get id
+        $id = DataLayer :: insertIntoPets($lostPet);
+        //lost pet table
+        $ownerName = $lostPet->getOwnerName();
+        $email = $lostPet->getEmail();
+        $phone = $lostPet->getPhone();
+        $dateMissing = $lostPet->getDateMissing();
+        DataLayer :: insertIntoLostPets($id, $ownerName, $email, $phone, $dateMissing);
+    }
+
+    /**
+     * @param $shelterPet
+     * @return void
+     */
     function addShelterPet($shelterPet){
         //add to pet table and get id
         $id = DataLayer :: insertIntoPets($shelterPet);
@@ -156,6 +215,14 @@ class DataLayer
         DataLayer :: insertIntoShelterPets($id, $status, $goodWithKids, $goodWithOtherPets, $healthConditions);
     }
 
+    /**
+     * @param $id
+     * @param $status
+     * @param $goodWithKids
+     * @param $goodWithOtherPets
+     * @param $healthConditions
+     * @return void
+     */
     function insertIntoShelterPets($id, $status, $goodWithKids, $goodWithOtherPets, $healthConditions){
         //define query
         $sql = "INSERT INTO `shelterPet`(`PetID`, `Status`, `GoodWithKids`, `GoodWithOtherPets`, `HealthConditions`) 

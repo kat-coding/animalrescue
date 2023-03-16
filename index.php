@@ -49,40 +49,45 @@ $f3->route('GET /missingPostInfo', function ($f3)
     $GLOBALS['con']->missingPetInfo($f3);
 });
 //lost pet form route
-$f3->route('GET|POST /lostpet', function ($f3){
+$f3->route('GET|POST /lostpet', function ($f3)
+{
     $GLOBALS['con']->lostpet($f3);
 });
 //summary lost pet route
-$f3->route('GET|POST /summary', function ($dataLayer){
+$f3->route('GET|POST /summary', function ($dataLayer)
+{
     $GLOBALS['con']->summary($dataLayer);
 });
 //submit lost pet route
-$f3->route('GET|POST /submit', function ($dataLayer){
+$f3->route('GET|POST /submit', function ($dataLayer)
+{
     $GLOBALS['con']->submit($dataLayer);
 });
 //admin add new shelter pet route
-$f3->route('GET|POST /shelterPet', function($f3){
+$f3->route('GET|POST /shelterPet', function($f3)
+{
     $GLOBALS['con']->shelterPet($f3);
 });
 //summary shelter pet route
-$f3->route('GET|POST /spsummary', function ($dataLayer){
+$f3->route('GET|POST /spsummary', function ($dataLayer)
+{
     $GLOBALS['con']->spsummary($dataLayer);
 });
 //submit shelter pet route
-$f3->route('GET|POST /spsubmit', function ($dataLayer){
+$f3->route('GET|POST /spsubmit', function ($dataLayer)
+{
     $GLOBALS['con']->spsubmit($dataLayer);
 });
 //route to admin page
-$f3->route('GET /adminpage', function ($f3){
+$f3->route('GET /adminpage', function ($f3)
+{
     $GLOBALS['con']->adminpage();
 });
-//admin login route--not working yet
-$f3->route('GET|POST /loginroute', function(){
+//admin login route
+$f3->route('GET|POST /loginroute', function()
+{
     $GLOBALS['con']->loginroute();
 });
-//admin show all pets
-$f3->route('GET|POST /showAllPets', function(){
-    $GLOBALS['con']->showAllPets();
-});
+
 //run instance of fat-free
 $f3->run();
