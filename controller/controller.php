@@ -460,8 +460,13 @@ class Controller
 
     function adminpage()
     {
-        $view = new Template();
-        echo $view->render('views/admin.html');
+        if($_SESSION['adminaccess'] == "allowed") {
+            $view = new Template();
+            echo $view->render('views/admin.html');
+            session_destroy();
+        }else{
+            $this->_f3->reroute('loginroute');
+        }
     }
 
     /**
@@ -476,12 +481,8 @@ class Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = $_POST['username'];
             $pw = $_POST['password'];
-            echo '<pre>';
-            var_dump($_POST);
-            echo '</pre>';
-
             if(Validate::checkLogin($user, $pw)){
-                echo "valid";
+                $_SESSION['adminaccess'] = "allowed";
                 $this->_f3->reroute('adminpage');
             }
         }
