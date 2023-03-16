@@ -4,7 +4,7 @@ class Validate
 {
     static function validName($name)
     {
-        return strlen($name) > 1 && ctype_alpha($name);
+        return strlen($name) > 1;
     }
 
     static function validPhone($phone)
@@ -36,7 +36,6 @@ class Validate
 
     static function validIMGURL($imgURL)
     {
-
         $folder = substr($imgURL, 0, 11);
         $string = 'upload-img/';
         if($folder != $string){
@@ -49,21 +48,22 @@ class Validate
     }
     static function validSpecies($species){
         //TODO add validation logic
-        return true;
+        return strlen($species) > 1 && ctype_alpha($species);
     }
     static function validAge($age){
         return (is_numeric($age) & $age <= 99);
     }
     static function validSex($sex){
         //TODO add validation logic
-        return true;
+        return strlen($sex) > 1 && ctype_alpha($sex);
     }
     static function validMissingDate($missingdate){
-        //TODO add date validation
-        return true;
+        echo $missingdate;
+        $regex = '/\\d\\d\\d\\d-\\d\\d-\\d\\d/i';
+        return preg_match($regex, $missingdate);
     }
     static function validCity($city){
         //TODO add city validation
-        return true;
+        return strlen($city) > 1 && ctype_alpha($city);
     }
 }
