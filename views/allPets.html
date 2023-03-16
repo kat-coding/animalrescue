@@ -1,0 +1,34 @@
+<include href="views/header.html"></include>
+<br>
+<h1 class="text">Adoptable pets</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th class="text" scope="col">image</th>
+        <th class="text" scope="col">Name</th>
+        <th class="text" scope="col">Age</th>
+        <th class="text" scope="col">Species</th>
+        <th class="text" scope="col">Location</th>
+        <th class="text" scope="col">Description</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <repeat group="{{ @availablepets }}" value="{{ @availablepets }}">
+        <tr>
+            <th class="text"><img src="{{ @availablepets['ImgUrl'] }}" alt="animals Image"></th>
+            <th class="text">{{ @availablepets['Name'] }} </th>
+            <th class="text">{{ @availablepets['Age'] }}</th>
+            <th class="text">{{ @availablepets['Species'] }}</th>
+            <th class="text">{{ @availablepets['City'] }}, {{ @availablepets['State'] }}</th>
+            <th class="text">{{ @availablepets['Description']}}</th>
+        </tr>
+    </repeat>
+    </tbody>
+</table>
+
+<h1 class="text">Lost pets</h1>
+
+
+<include href="views/header.html"></include>
+<br>

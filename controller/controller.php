@@ -137,7 +137,6 @@ class Controller
             $newLostPet = new LostPet();
             $_SESSION['newLostPet'] = $newLostPet;
 
-
             $fname = $_POST['fname'];
             $lname = $_POST['lname'];
             $email = $_POST['email'];
@@ -295,10 +294,11 @@ class Controller
      * the info and reroutes to the shelter pet summary page
      * @return void
      */
-    function shelterpet()
+    function shelterpet($_f3)
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $newShelterPet = new ShelterPet();
+            $_SESSION['newShelterPet'] = $newShelterPet;
 
             $name = $_POST['name'];
             $age = $_POST['age'];
@@ -313,45 +313,45 @@ class Controller
             $health = $_POST['health'];
 
             //set whatever we are not validating
-            $newShelterPet->setDescription($description);
-            $newShelterPet->setStatus($status);
-            $newShelterPet->setGoodWithKids($kids);
-            $newShelterPet->setGoodWithOtherPets($goodwpets);
-            $newShelterPet->setHealthConditions($health);
+            $_SESSION['newShelterPet']->setDescription($description);
+            $_SESSION['newShelterPet']->setStatus($status);
+            $_SESSION['newShelterPet']->setGoodWithKids($kids);
+            $_SESSION['newShelterPet']->setGoodWithOtherPets($goodwpets);
+            $_SESSION['newShelterPet']->setHealthConditions($health);
             //set pet name to object
             if(Validate::validName($name)){
-                $newShelterPet->setName($name);
+                $_SESSION['newShelterPet']->setName($name);
             }else {
                 $this->_f3->set('errors["name"]', 'Invalid name');
             }
 
-            //set state to object
+            //set US state to object
             if (Validate::validState($state)){
-                $newShelterPet->setState($state);
+                $_SESSION['newShelterPet']->setState($state);
             }else{
                 $this->_f3->set('errors["state"]', 'State must be selected');
             }
             //set city to object
             if(Validate::validCity($city)){
-                $newShelterPet->setCity($city);
+                $_SESSION['newShelterPet']->setCity($city);
             }else{
                 $this->_f3->set('errors["city"]', 'Invalid city');
             }
             //set species
             if(Validate::validSpecies($species)){
-                $newShelterPet->setSpecies($species);
+                $_SESSION['newShelterPet']->setSpecies($species);
             }else{
                 $this->_f3->set('errors["species"]', 'Species is invalid');
             }
             //set age
             if(Validate::validAge($age)){
-                $newShelterPet->setAge($age);
+                $_SESSION['newShelterPet']->setAge($age);
             }else{
                 $this->_f3->set('errors["age"]', 'Age must be 1-2 digit number');
             }
             //set sex to object
             if(Validate::validSex($sex)){
-                $newShelterPet->setSex($sex);
+                $_SESSION['newShelterPet']->setSex($sex);
             }else{
                 $this->_f3->set('errors["sex"]', 'Invalid sex');
             }
@@ -360,17 +360,16 @@ class Controller
             if(!empty($_FILES["file"]["name"])) {
                 $imgURL = Upload::uploadImage($this->_f3);
                 if(Validate::validIMGURL($imgURL)){
-                    $newShelterPet->setImgUrl($imgURL);
+                    $_SESSION['newShelterPet']->setImgUrl($imgURL);
                 }else{
-                    $newShelterPet->setImgUrl(substr($imgURL, 0, 10));
+                    $$_SESSION['newShelterPet']->setImgUrl(substr($imgURL, 0, 10));
                 }
                 //ELSE{ errors set in uploadImage() function based on the error}
             }else{
-                $newShelterPet->setImgUrl("upload-img/generic.png");
+                $$_SESSION['newShelterPet']->setImgUrl("upload-img/generic.png");
             }
 
             if(empty($this->_f3->get('errors'))) {
-                $_SESSION['newShelterPet'] = $newShelterPet;
                 $this->_f3->reroute('spsummary');
             }
         }//end of if POST
@@ -481,6 +480,12 @@ class Controller
         //$f3->set('password', sha1('catdog'));
         $view = new Template();
         echo $view->render('views/login.html');
+    }
+
+    function showAllPets()
+    {
+        $view = new Template();
+        echo $view->render('views/allPets.html');
     }
 
 
