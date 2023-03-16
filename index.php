@@ -23,55 +23,35 @@ $f3->route('GET /', function()
 {
     $GLOBALS['con']->home();
 });
-
 //home route for navbar
 $f3->route('GET /home', function()
 {
     $GLOBALS['con']->home();
 });
-
 //define "About" page route
 $f3->route('GET /about', function()
 {
     $GLOBALS['con']->about();
 });
-
 //define "Available Pets" page route
 $f3->route('GET /adoptable', function()
 {
     $GLOBALS['con']->availablepets();
 });
-
-//define "Found Pets" page route
-$f3->route('GET /foundpets', function()
-{
-    $GLOBALS['con']->foundpets();
-});
-
 //define "Missing Pets" page route
 $f3->route('GET /missingpets', function ()
 {
     $GLOBALS['con']->missingpets();
 });
-
 //define "Missing Pets info" page route
 $f3->route('GET /missingPostInfo', function ($f3)
 {
     $GLOBALS['con']->missingPetInfo($f3);
-
 });
-//define "Resources" page route
-$f3->route('GET /resources', function (){
-
-    $view = new Template();
-    echo $view-> render('views/resources.html');
-});
-
 //lost pet form route
 $f3->route('GET|POST /lostpet', function ($f3){
     $GLOBALS['con']->lostpet($f3);
 });
-
 //summary lost pet route
 $f3->route('GET|POST /summary', function ($dataLayer){
     $GLOBALS['con']->summary($dataLayer);
@@ -80,12 +60,10 @@ $f3->route('GET|POST /summary', function ($dataLayer){
 $f3->route('GET|POST /submit', function ($dataLayer){
     $GLOBALS['con']->submit($dataLayer);
 });
-
 //admin add new shelter pet route
 $f3->route('GET|POST /shelterPet', function($f3){
     $GLOBALS['con']->shelterPet($f3);
 });
-
 //summary shelter pet route
 $f3->route('GET|POST /spsummary', function ($dataLayer){
     $GLOBALS['con']->spsummary($dataLayer);
@@ -106,6 +84,5 @@ $f3->route('GET|POST /loginroute', function(){
 $f3->route('GET|POST /showAllPets', function(){
     $GLOBALS['con']->showAllPets();
 });
-
 //run instance of fat-free
 $f3->run();

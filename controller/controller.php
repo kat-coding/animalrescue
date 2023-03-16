@@ -61,18 +61,6 @@ class Controller
         $view = new Template();
         echo $view-> render('views/adoptable.html');
     }
-
-    /**
-     * TODO: Write this page or remove this route
-     * Route which renders the found pets page
-     * @return void
-     */
-    function foundpets()
-    {
-        $view = new Template();
-        echo $view-> render('views/found.html');
-    }
-
     /**
      * Missing Pets page route
      *
@@ -110,18 +98,6 @@ class Controller
         $view = new Template();
         echo $view-> render('views/missingPostInfo.html');
     }
-
-    /**
-     * Route that renders the resources page that we haven't built yet
-     * TODO: remove this route or create resources page
-     * @return void
-     */
-    function resources()
-    {
-        $view = new Template();
-        echo $view-> render('views/resources.html');
-    }
-
     /**
      * Lost Pet Form Route
      *
@@ -414,50 +390,8 @@ class Controller
     }
 
     /**
-     * I believe this is a redundant route
-     * TODO: delete this route if it is redundant
      * @return void
      */
-        function confirm()
-    {
-        $view = new Template();
-        echo $view->render('views/addShelterPet.html');
-    }
-/*
-    /** This was moved to class
-     * uploadImage function for client image uploads
-     * @return void uploads images to upload-img directory
-     */
-//    function uploadImage()
-//    {
-//        $targetDir = "upload-img/";
-//        $fileName = basename($_FILES["file"]["name"]);
-//        $targetFilePath = $targetDir . $fileName;
-//        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-//        $_SESSION['file']= $_FILES["file"]["name"];
-//        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
-//            //allow certain file formats
-//            $allowTypes = array('jpg','png','jpeg');
-//            if(in_array($fileType, $allowTypes)){
-//                //upload file to server
-//                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-//                    $statusMsg = "The file ".$fileName. " has been uploaded.";
-//                    $_SESSION['imgURL'] = $targetFilePath;
-//
-//                }else{
-//                    $statusMsg = "Sorry, there was an error uploading your file.";
-//                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
-//                }
-//            }else{
-//                $statusMsg = 'Sorry, only JPG, JPEG files are allowed to upload.';
-//                $this->_f3->set('errors["imgUpload"]', $statusMsg);
-//            }
-//        }else{
-//            $statusMsg = 'Please select a file to upload.';
-//            $this->_f3->set('errors["imgUpload"]', $statusMsg);
-//        }
-//    }
-
     function adminpage()
     {
         if($_SESSION['adminaccess'] == "allowed") {
@@ -470,7 +404,6 @@ class Controller
     }
 
     /**
-     * TODO: Finish writing this and get it to work
      * This is the route to the admin login page. The user enters
      * their login and password and if valid, they are rerouted
      * to the admin page
