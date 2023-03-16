@@ -21,7 +21,7 @@ and missing pets so others can help find them
     <tbody>
     <repeat group="{{ @LostPets }}" value="{{ @LostPets }}">
         <tr>
-            <th><img src="{{ @LostPets['ImgUrl'] }}" alt="animals Image"></th>
+            <th><img class="img-thumbnail" src="{{ @LostPets['ImgUrl'] }}" alt="animals Image"></th>
             <th class="text">{{ @LostPets['Name'] }} </th>
             <th class="text">{{ @LostPets['Age'] }}</th>
             <th class="text">{{ @LostPets['Species'] }}</th>

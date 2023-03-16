@@ -22,7 +22,7 @@ and adoptable pets from the shelter in a table
     <tbody>
     <repeat group="{{ @availablepets }}" value="{{ @availablepets }}">
         <tr>
-            <th class="text"><img src="{{ @availablepets['ImgUrl'] }}" alt="animals Image"></th>
+            <th class="text"><img class="img-thumbnail" src="{{ @availablepets['ImgUrl'] }}" alt="animals Image"></th>
             <th class="text">{{ @availablepets['Name'] }} </th>
             <th class="text">{{ @availablepets['Age'] }}</th>
             <th class="text">{{ @availablepets['Species'] }}</th>

@@ -102,6 +102,10 @@ $f3->route('GET /adminpage', function ($f3){
 $f3->route('GET|POST /loginroute', function(){
     $GLOBALS['con']->loginroute();
 });
+//admin show all pets
+$f3->route('GET|POST /showAllPets', function(){
+    $GLOBALS['con']->showAllPets();
+});
 
 //run instance of fat-free
 $f3->run();

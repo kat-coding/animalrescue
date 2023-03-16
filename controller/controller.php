@@ -474,7 +474,16 @@ class Controller
     function loginroute()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo 'You want to go to admin page.';
+            $user = $_POST['username'];
+            $pw = $_POST['password'];
+            echo '<pre>';
+            var_dump($_POST);
+            echo '</pre>';
+
+            if(Validate::checkLogin($user, $pw)){
+                echo "valid";
+                $this->_f3->reroute('adminpage');
+            }
         }
         //$f3->set('username', sha1('syntaxians'));
         //$f3->set('password', sha1('catdog'));

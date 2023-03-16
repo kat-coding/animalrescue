@@ -26,7 +26,7 @@ class Validate
 
     static function checkLogin($username, $password)
     {
-        return $username == 'syntaxians' && $password == 'catdog';
+        return $username == 'syntaxians' & $password == 'catdog';
     }
 
 //    static function validPassword($password)
