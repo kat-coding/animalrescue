@@ -9,7 +9,7 @@ class Upload{
         $_SESSION['file']= $_FILES["file"]["name"];
         if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
             //allow certain file formats
-            $allowTypes = array('jpg','png','jpeg','gif','pdf');
+            $allowTypes = array('jpg','png','jpeg');
             if(in_array($fileType, $allowTypes)){
                 //upload file to server
                 if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
@@ -22,7 +22,7 @@ class Upload{
                     $con->set('errors["imgUpload"]', $statusMsg);
                 }
             }else{
-                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+                $statusMsg = 'Sorry, only JPG, JPEG, PNG files are allowed to upload.';
                 $con->set('errors["imgUpload"]', $statusMsg);
             }
         }else{

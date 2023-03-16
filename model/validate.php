@@ -36,6 +36,7 @@ class Validate
 
     static function validIMGURL($imgURL)
     {
+
         $folder = substr($imgURL, 0, 11);
         $string = 'upload-img/';
         if($folder != $string){

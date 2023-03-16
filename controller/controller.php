@@ -356,13 +356,13 @@ class Controller
             if(!empty($_FILES["file"]["name"])) {
                 $imgURL = Upload::uploadImage($this->_f3);
                 if(Validate::validIMGURL($imgURL)){
-                    $newShelterPet->setImgUrl($imgURL);
+                    $_SESSION['newLostPet']->setImgUrl($imgURL);
                 }else{
-                    $newShelterPet->setImgUrl(substr($imgURL, 0, 10));
+                    $_SESSION['newLostPet']->setImgUrl(substr($imgURL, 0, 10));
                 }
                 //ELSE{ errors set in uploadImage() function based on the error}
             }else{
-                $newShelterPet->setImgUrl("upload-img/generic.png");
+                $_SESSION['newLostPet']->setImgUrl("upload-img/generic.png");
             }
 
             if(empty($this->_f3->get('errors'))) {
@@ -424,37 +424,37 @@ class Controller
     /** This was moved to class
      * uploadImage function for client image uploads
      * @return void uploads images to upload-img directory
-
-    function uploadImage()
-    {
-        $targetDir = "upload-img/";
-        $fileName = basename($_FILES["file"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-        $_SESSION['file']= $_FILES["file"]["name"];
-        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
-            //allow certain file formats
-            $allowTypes = array('jpg','png','jpeg','gif','pdf');
-            if(in_array($fileType, $allowTypes)){
-                //upload file to server
-                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-                    $statusMsg = "The file ".$fileName. " has been uploaded.";
-                    $_SESSION['imgURL'] = $targetFilePath;
-
-                }else{
-                    $statusMsg = "Sorry, there was an error uploading your file.";
-                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
-                }
-            }else{
-                $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-                $this->_f3->set('errors["imgUpload"]', $statusMsg);
-            }
-        }else{
-            $statusMsg = 'Please select a file to upload.';
-            $this->_f3->set('errors["imgUpload"]', $statusMsg);
-        }
-    }
      */
+//    function uploadImage()
+//    {
+//        $targetDir = "upload-img/";
+//        $fileName = basename($_FILES["file"]["name"]);
+//        $targetFilePath = $targetDir . $fileName;
+//        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+//        $_SESSION['file']= $_FILES["file"]["name"];
+//        if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
+//            //allow certain file formats
+//            $allowTypes = array('jpg','png','jpeg');
+//            if(in_array($fileType, $allowTypes)){
+//                //upload file to server
+//                if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+//                    $statusMsg = "The file ".$fileName. " has been uploaded.";
+//                    $_SESSION['imgURL'] = $targetFilePath;
+//
+//                }else{
+//                    $statusMsg = "Sorry, there was an error uploading your file.";
+//                    $this->_f3->set('errors["imgUpload"]', $statusMsg);
+//                }
+//            }else{
+//                $statusMsg = 'Sorry, only JPG, JPEG files are allowed to upload.';
+//                $this->_f3->set('errors["imgUpload"]', $statusMsg);
+//            }
+//        }else{
+//            $statusMsg = 'Please select a file to upload.';
+//            $this->_f3->set('errors["imgUpload"]', $statusMsg);
+//        }
+//    }
+
     function adminpage()
     {
         $view = new Template();

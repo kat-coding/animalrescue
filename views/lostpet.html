@@ -175,8 +175,8 @@ Lost pet form page with included header and footer
                 <label for="file" class="form-label text">Select Image to Upload:</label>
                 <input class="text" id="file" type="file" name="file">
 
-                <check if="{{ isset( @errors['imageError'])}}">
-                    <span class="text-danger">{{ @errors['imageError'] }}</span>
+                <check if="{{ isset( @errors['imgUpload'])}}">
+                    <span class="text-danger">{{ @errors['imgUpload'] }}</span>
                 </check>
             </div>
         </div><br>
