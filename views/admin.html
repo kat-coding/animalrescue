@@ -1,22 +1,46 @@
 <include href="views/header.html"></include>
 
 <div class="text">
-    <h1>this is the admin page</h1>
-    <h3>What would you like to do?</h3>
+    <h1 id="adminh1">Admin page</h1>
+
 </div>
 
 <div class="text">
     <div class="row">
         <div class="col-6">
-            <a href="shelterpet">Add a new pet to the Shelter</a>
+            <h3>Shelter Pets</h3>
         </div>
         <div class="col-6">
-            <a href="showAllPets">View all Pets in database</a>
+            <a href="shelterpet">Add a new pet to the Shelter</a>
         </div>
-
     </div>
 </div>
 
+<table class="table">
+    <thead>
+    <tr>
+        <th class="text" scope="col">image</th>
+        <th class="text" scope="col">Name</th>
+        <th class="text" scope="col">Age</th>
+        <th class="text" scope="col">Species</th>
+        <th class="text" scope="col">Location</th>
+        <th class="text" scope="col">Description</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <repeat group="{{ @availablepets }}" value="{{ @availablepets }}">
+        <tr>
+            <th class="text"><img class="img-thumbnail" src="{{ @availablepets['ImgUrl'] }}" alt="animals Image"></th>
+            <th class="text">{{ @availablepets['Name'] }} </th>
+            <th class="text">{{ @availablepets['Age'] }}</th>
+            <th class="text">{{ @availablepets['Species'] }}</th>
+            <th class="text">{{ @availablepets['City'] }}, {{ @availablepets['State'] }}</th>
+            <th class="text">{{ @availablepets['Description']}}</th>
+        </tr>
+    </repeat>
+    </tbody>
+</table>
 
 
 <include href="views/footer.html"></include>
