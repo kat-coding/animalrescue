@@ -356,13 +356,13 @@ class Controller
             if(!empty($_FILES["file"]["name"])) {
                 $imgURL = Upload::uploadImage($this->_f3);
                 if(Validate::validIMGURL($imgURL)){
-                    $_SESSION['newLostPet']->setImgUrl($imgURL);
+                    $newShelterPet->setImgUrl($imgURL);
                 }else{
-                    $_SESSION['newLostPet']->setImgUrl(substr($imgURL, 0, 10));
+                    $newShelterPet->setImgUrl(substr($imgURL, 0, 10));
                 }
                 //ELSE{ errors set in uploadImage() function based on the error}
             }else{
-                $_SESSION['newLostPet']->setImgUrl("upload-img/generic.png");
+                $newShelterPet->setImgUrl("upload-img/generic.png");
             }
 
             if(empty($this->_f3->get('errors'))) {
