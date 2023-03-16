@@ -8,6 +8,9 @@ This file contains all the styles for the entire project
     color: white;
     margin: 20px;
 }
+#adminh1{
+    text-align: center;
+}
 body{
     background-color: black;
 }
