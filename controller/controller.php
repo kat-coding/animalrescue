@@ -99,10 +99,14 @@ class Controller
      * @return void
      */
     function missingPetInfo(){
-        echo "<pre>";
+
+        //Get the data from the model
+        $lost= $GLOBALS['dataLayer']->getLostPet($_GET['id']);
+        $this->_f3->set('LostPet', $lost);
+        /*echo "<pre>";
         var_dump($_GET);
-        var_dump($_POST);
-        echo "</pre>";
+        var_dump($lost);
+        echo "</pre>";*/
         $view = new Template();
         echo $view-> render('views/missingPostInfo.html');
     }

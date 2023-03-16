@@ -48,6 +48,23 @@ class DataLayer
         //5. Process the results
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+    function getLostPet($id)
+    {
+        //1. Define the query
+        $sql = "SELECT * FROM pets, lostPets where lostPets.PetID=pets.PetID and lostPets.PetID =$id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the query
+        $statement->execute();
+
+        //5. Process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     static function  getState()
     {
         return array("AL" => "Alabama", "AK" => "Alaska", "AZ" => "Arizona", "AR" => "Arkansas", "CA" => "California",
