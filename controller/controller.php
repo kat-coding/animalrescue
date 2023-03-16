@@ -338,11 +338,11 @@ class Controller
                 if(Validate::validIMGURL($imgURL)){
                     $_SESSION['newShelterPet']->setImgUrl($imgURL);
                 }else{
-                    $$_SESSION['newShelterPet']->setImgUrl(substr($imgURL, 0, 10));
+                    $_SESSION['newShelterPet']->setImgUrl(substr($imgURL, 0, 10));
                 }
                 //ELSE{ errors set in uploadImage() function based on the error}
             }else{
-                $$_SESSION['newShelterPet']->setImgUrl("upload-img/generic.png");
+                $_SESSION['newShelterPet']->setImgUrl("upload-img/generic.png");
             }
 
             if(empty($this->_f3->get('errors'))) {
