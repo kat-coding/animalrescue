@@ -222,6 +222,8 @@ class Controller
             }
         }
         $this->_f3->set("states", Datalayer::getState());
+        $this->_f3->set("sex", Datalayer::getSex());
+        $this->_f3->set("species", DataLayer::getSpecies());
         $view = new Template();
         echo $view-> render('views/lostpet.html');
     }
@@ -350,6 +352,10 @@ class Controller
             }
         }//end of if POST
         $this->_f3->set("states", Datalayer::getState());
+        $this->_f3->set("sex", Datalayer::getSex());
+        $this->_f3->set("species", DataLayer::getSpecies());
+        $this->_f3->set("status", DataLayer::getStatus());
+
         $view = new Template();
         echo $view-> render('views/addShelterPet.html');
     }//end of shelterpet()

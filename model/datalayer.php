@@ -116,6 +116,27 @@ class DataLayer
     }
 
     /**
+     * @return string[] array of possible sex options (for animals)
+     */
+    static function getSex(){
+        return array('female', 'male');
+    }
+
+    /**
+     * @return string[] array of species options
+     */
+    static function getSpecies(){
+        return array("cat", "dog", "other");
+    }
+
+    /**
+     * @return string[] array of shelter status
+     */
+    static function getStatus(){
+        return array("new", "adoptable", "pending");
+    }
+
+    /**
      * Function for adding pets to database
      *
      * This function takes in a pet object and inserts the fields of the
