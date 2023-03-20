@@ -396,11 +396,20 @@ class Controller
     }
 
     /**
+     * Admin page route
+     *
+     * The admin page shows a list of all shelter pets as in
+     * the adoptable pets page, but also contains a link to add a new
+     * pet via the addShelterPet.html form. If the login is invalid (if someone
+     * tries to access it directly and bypass the login), it
+     * routes back to the login page
      * @return void
      */
     function adminpage()
     {
         if($_SESSION['adminaccess'] == "allowed") {
+            $availablepets= $GLOBALS['dataLayer']->getavailablepets();
+            $this->_f3->set('availablepets', $availablepets);
             $view = new Template();
             echo $view->render('views/admin.html');
             session_destroy();
