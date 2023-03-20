@@ -22,3 +22,5 @@ Format: date,Time worked on project, Who was there(initals).
 
 3/16/2023 1 hr (KW)(AB)(DB) worked on final touches before peer review
 
+3/20/2023 1/2 hr (DB)(AB) worked on readme
+
