@@ -25,4 +25,5 @@ Kate, Alex,Dee.
 ## Your submission shows adequate effort for a final project in a full-stack web development course.
 
 ## BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
-![DB]([https://user-images.githubusercontent.com/80292719/145856451-f44327f6-4a92-432a-9c3f-02b925e6caa7.png](https://github.com/kat-coding/animalrescue/blob/main/data%20.png))
+<img src="data .png" alt="DB" title="DB Diagram">
+
