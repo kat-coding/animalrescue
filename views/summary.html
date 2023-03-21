@@ -9,29 +9,31 @@
     <div class="row d-flex flex-wrap align-items-center">
         <h4 class="about-title text-center">Pet's Information</h4>
         <div class="col-md-6 ">
-            <p class="text">Pet's Name: {{ @_SESSION['newLostPet']->getName() }}</p>
+            <p class="text"><b class="summary-titles">Pet's Name:</b> {{ @_SESSION['newLostPet']->getName() }}</p>
             <hr class="summary">
             <check if="{{@_SESSION['newLostPet']->getDateMissing() != ''}}">
-            <p class="text">Date Missing: {{ @_SESSION['newLostPet']->getDateMissing() }}</p>
+            <p class="text"><b class="summary-titles">Date Missing:</b> {{ @_SESSION['newLostPet']->getDateMissing() }}</p>
             <hr class="summary">
             </check>
-            <p class="text">Species: {{ @_SESSION['newLostPet']->getSpecies() }}</p>
+            <p class="text"><b class="summary-titles">Species:</b> {{ @_SESSION['newLostPet']->getSpecies() }}</p>
             <hr class="summary">
-            <p class="text">Age: {{ @_SESSION['newLostPet']->getAge() }}</p>
+            <p class="text"><b class="summary-titles">Age:</b> {{ @_SESSION['newLostPet']->getAge() }}</p>
             <hr class="summary">
-            <p class="text">City: {{ @_SESSION['newLostPet']->getCity() }}</p>
+            <p class="text"><b class="summary-titles">City:</b> {{ @_SESSION['newLostPet']->getCity() }}</p>
             <hr class="summary">
-            <p class="text">State: {{ @_SESSION['newLostPet']->getState() }}</p>
+            <p class="text"><b class="summary-titles">State:</b> {{ @_SESSION['newLostPet']->getState() }}</p>
             <hr class="summary">
-            <p class="text">Description: {{ @_SESSION['newLostPet']->getDescription() }}</p>
+            <p class="text"><b class="summary-titles">Description:</b> {{ @_SESSION['newLostPet']->getDescription() }}</p>
         </div>
         <div class="col-md-6 img-display">
             <check if="{{ @_SESSION['newLostPet']->getimgUrl() !== '' }}">
                 <true>
                     <img class="img-fluid img-thumbnail mx-auto d-block" src="{{ @_SESSION['newLostPet']->getimgUrl() }}" alt="user uploaded image">
+                    <br>
                 </true>
                 <false>
                     <img class="img-fluid img-thumbnail mx-auto d-block" src="images/harryCat.jpg" alt="user uploaded image">
+                    <br>
                 </false>
             </check>
         </div>
@@ -45,11 +47,11 @@
     <h4 class="about-title text-center">Owner's Information</h4>
     <div class="row d-flex flex-wrap align-items-center">
         <div class="col-md-12">
-            <p class="top-button text">Owner's Name: {{ @_SESSION['newLostPet']->getOwnerName() }}</p>
+            <p class="top-button text"><b class="summary-titles">Owner's Name:</b> {{ @_SESSION['newLostPet']->getOwnerName() }}</p>
             <hr class="summary">
-            <p class="text" >Email: {{ @_SESSION['newLostPet']->getEmail() }}</p>
+            <p class="text" ><b class="summary-titles">Email:</b> {{ @_SESSION['newLostPet']->getEmail() }}</p>
             <hr class="summary">
-            <p class="text">Phone: {{ @_SESSION['newLostPet']->getPhone() }}</p>
+            <p class="text"><b class="summary-titles">Phone:</b> {{ @_SESSION['newLostPet']->getPhone() }}</p>
         </div>
         <div class="col-md-6">
         </div>
