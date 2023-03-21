@@ -137,13 +137,10 @@ class DataLayer
     }
 
     /**
-     * Function for adding pets to database
+     * Helper Function for adding to pets table in the database,
+     * utilized by addLostPets and addShelterPet to insert shared pet data into database
+     * then returns the PetId from the pets table to be used as foreign key for shelterPet and lostPet tables
      *
-     * This function takes in a pet object and inserts the fields of the
-     * pet parent class into the database. This is a necessary first step to
-     * be able to insert a shelter pet or lost pet because the pet ID is auto-generated
-     * in the database. It returns a unique pet id which can be passed into the
-     * other functions to add to the other tables in the database
      * @param $pet pet object containing required fields for all pets
      * @return $id unique id for pet
      */
@@ -180,14 +177,15 @@ class DataLayer
     }
 
     /**
-     * @param $id
-     * @param $ownerName
-     * @param $email
-     * @param $phone
-     * @param $datemissing
+     * Helper Function for addLostPet function. This function takes parameters unique to the lostPet class and inserts them into the
+     * lostPets table of the database.
+     * @param $id is petId from inserting into pet table and foreign key for lostPet table
+     * @param $ownerName String owner's name
+     * @param $email String email
+     * @param $phone String phone number
+     * @param $datemissing String date
      * @return void
      */
-
     function insertIntoLostPets($id, $ownerName, $email, $phone, $datemissing){
         //define query
         $sql = "INSERT INTO `lostPets`(`PetID`, `OwnersName`, `Email`, `Phone`, `Datamissing`) 
@@ -206,7 +204,8 @@ class DataLayer
     }
 
     /**
-     * @param $lostPet
+     * This function takes a lostPet object and uses helper functions to insert the object data into the corresponding databases (pets, lostPets)
+     * @param $lostPet instance of lostPet
      * @return void
      */
     function addLostPet($lostPet){
@@ -222,6 +221,7 @@ class DataLayer
     }
 
     /**
+     * This function takes a shelterPet object and uses helper functions to insert the object data into the corresponding databases (pets, shelterPets)
      * @param $shelterPet
      * @return void
      */
@@ -237,11 +237,13 @@ class DataLayer
     }
 
     /**
-     * @param $id
-     * @param $status
-     * @param $goodWithKids
-     * @param $goodWithOtherPets
-     * @param $healthConditions
+     * Helper Function for addShelterPet function. This function takes parameters unique to the shelterPet class and inserts them into the
+     * shelterPets table of the database.
+     * @param $id is petId from inserting into pet table and foreign key for lostPet table
+     * @param $status String
+     * @param $goodWithKids String
+     * @param $goodWithOtherPets String
+     * @param $healthConditions String
      * @return void
      */
     function insertIntoShelterPets($id, $status, $goodWithKids, $goodWithOtherPets, $healthConditions){
@@ -262,6 +264,4 @@ class DataLayer
         $newID = $this->_dbh->lastInsertId();
         echo $newID;
     }
-
-
 }
