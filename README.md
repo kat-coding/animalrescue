@@ -1,5 +1,5 @@
 # animalrescue
-A website for a fictional animal shelter. 
+A website for a fictional animal shelter. The website contains pictures of animals currently at the shelter and also provides a service for people who have lost pets to post their pet. Other users who have found pets can view the lost pets and contact the shelter to contact the pet owner (we gather the owner's personal information but don't display it on the website). There is a secure admin login to add adoptable pets to the shelter database.
 ## Team Members
 Kat Watkins, Alex Brenna, Dee Brecke.
 
@@ -7,6 +7,11 @@ Kat Watkins, Alex Brenna, Dee Brecke.
 ## Separates all database/business logic using the MVC pattern.
 1(database): database logic is in Datalayer file in model folder  
 1(business): business logic is in the controller file in the controller folder and the index page
+Model contains datalayer, upload and validation
+View contain all of the html pages that can be viewed in the browser
+Controller contains the route controls and calls the back end validation where appropriate
+Classes folder contains the OOP classes
+
 ## Routes all URLs and leverages a templating language using the Fat-Free framework.
 2:This is done in the controller file in the controller folder and the index page
 ## Has a clearly defined database layer using PDO and prepared statements. 
@@ -18,7 +23,7 @@ Kat Watkins, Alex Brenna, Dee Brecke.
 
 4(view): misspostinfo.html, missing.html, adoptable.html  
 ## Has a history of commits from both team members to a Git repository. Commits are clearly commented.
-5: this can be view on github. Also, we have a timetracker.md file in which we documented any time that we worked together that will only show as one person committing to github.
+5: This can be view on github. Also, we have a timetracker.md file in which we documented any time that we worked together that will only show as one person committing to github.
 ## Uses OOP, and utilizes multiple classes, including at least one inheritance relationship.
 6: this is handled in the classes folder
 
