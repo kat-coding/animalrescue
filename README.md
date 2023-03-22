@@ -7,9 +7,13 @@ Kat Watkins, Alex Brenna, Dee Brecke.
 ## Separates all database/business logic using the MVC pattern.
 1(database): database logic is in Datalayer file in model folder  
 1(business): business logic is in the controller file in the controller folder and the index page
+
 Model contains datalayer, upload and validation
+
 View contain all of the html pages that can be viewed in the browser
+
 Controller contains the route controls and calls the back end validation where appropriate
+
 Classes folder contains the OOP classes
 
 ## Routes all URLs and leverages a templating language using the Fat-Free framework.
