@@ -48,6 +48,7 @@ It also has client side validation in the validate.js file in the model folder
 ## Your submission shows adequate effort for a final project in a full-stack web development course.
 10: We believe it does. we think he hit all the required marks. We each put a considerable amout of time, effort and care into this project
 ## BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
+11: this can be found on the facts.html page which uses API to show pet facts.
 ## Admin Log-in ##
 
 Username: syntaxians
