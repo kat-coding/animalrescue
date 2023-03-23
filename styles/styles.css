@@ -30,6 +30,11 @@ body{
     color: red;
     display: none;
 }
+.facts{
+    padding: 15px;
+    margin: 50px;
+    min-height: 200px;
+}
 .img-div{
     justify-content: center;
 }
