@@ -88,6 +88,11 @@ $f3->route('GET|POST /loginroute', function()
 {
     $GLOBALS['con']->loginroute();
 });
+//facts route
+$f3->route('GET|POST /facts', function()
+{
+    $GLOBALS['con']->facts();
+});
 
 //run instance of fat-free
 $f3->run();

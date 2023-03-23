@@ -14,6 +14,9 @@ This file contains all the styles for the entire project
 body{
     background-color: black;
 }
+.btn-facts{
+    margin-top: 75px;
+}
 .btn-primary{
     background-color: #70c27a;
     border-color: #70c27a;
@@ -64,6 +67,9 @@ body{
 }
 .summary{
     background-color: white !important;
+}
+.summary-titles{
+    color:#70c27a;
 }
 .text{
     color: white;

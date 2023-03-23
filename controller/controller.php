@@ -42,7 +42,15 @@ class Controller
         $view = new Template();
         echo $view-> render('views/about.html');
     }
-
+    /**
+     * Fact page, gets animal facts from API and displays to page
+     *  @return void
+     */
+    function facts()
+    {
+        $view = new Template();
+        echo $view-> render('views/facts.html');
+    }
     /**
      * Adoptable pets page route
      *

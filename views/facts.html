@@ -1,0 +1,49 @@
+<include href="views/header.html"></include>
+</div>
+</nav>
+<!--Above required for each page for navbar-->
+<br>
+<h1 class="about-title text-center">Interesting Facts About Cats And Dogs</h1>
+<br>
+
+    <!--Summary from form left, picture right-->
+    <div class="row ">
+
+        <div class="col-lg-5 text-center border rounded position-relative">
+            <div class="text-center" id="cat-fact"></div>
+            <button id="cat" class="btn btn-primary btn-facts position-absolute bottom-0 start-50 translate-middle-x">Click Here For Cat Facts</button><br><br>
+        </div><br>
+        <div class="col-lg-2"></div><br>
+        <div class="col-lg-5 text-center  border rounded position-relative">
+            <div class="text-center" id="dog-fact"></div>
+            <button id="dog" class="btn btn-primary btn-facts position-absolute bottom-0 start-50 translate-middle-x">Click Here For Dog Facts</button><br>
+        </div>
+
+    </div>
+
+
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script>
+
+    $('#cat').on("click", function (){
+        let url = "https://cat-fact.herokuapp.com/facts";
+        $.getJSON(url, function (result){
+            let num = Math.floor(Math.random() * 6);
+            let newFact = result[num].text;
+            let markUp = `<p class="text">${newFact}</p>`;
+            document.getElementById('cat-fact').innerHTML = markUp;
+        });
+    });
+
+    $('#dog').on("click", function (){
+        let url = "https://dog-api.kinduff.com/api/facts";
+        $.getJSON(url, function (result){
+            let newFact = result.facts;
+            let markUp = `<p class="text">${newFact}</p>`;
+            document.getElementById('dog-fact').innerHTML = markUp;
+        });
+    });
+</script>
+
+<include href="views/footer.html"></include>
